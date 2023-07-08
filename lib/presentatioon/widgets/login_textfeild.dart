@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glitzup/application/core/colors.dart';
 
 Widget loginTextFeild(String hintText, bool obscureText) {
   return TextFormField(
@@ -6,14 +7,14 @@ Widget loginTextFeild(String hintText, bool obscureText) {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        // focusedBorder: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(10),
-        //     borderSide: const BorderSide(
-        //         color:
-        //              kBlackColor)),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+                color: kRedColor
+                    )),
         // enabledBorder: OutlineInputBorder(
         //   borderRadius: BorderRadius.circular(10),
-        //   borderSide: const BorderSide(color: Brightness == Brightness.dark ? kBlackColor : kWhiteColor),
+        //   borderSide: const BorderSide(color:kBlackColor),
         // ),
         labelText: hintText
         // hintText: hintText,

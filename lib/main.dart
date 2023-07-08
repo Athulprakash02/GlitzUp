@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glitzup/application/core/themes.dart';
-import 'package:glitzup/presentatioon/screens/login_screen.dart';
+import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());

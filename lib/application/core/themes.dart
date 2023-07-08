@@ -1,37 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:glitzup/application/core/colors.dart';
 
 final lightTheme = ThemeData(
-  brightness: Brightness.light,
-appBarTheme: const AppBarTheme(backgroundColor: kWhiteColor),
-primarySwatch: Colors.red,
-primaryColor: kBlackColor,
-
-scaffoldBackgroundColor: kWhiteColor,
-fontFamily: 'SpaceGrotesk',
-
-textTheme: const TextTheme(
-  bodyLarge: TextStyle(color: kBlackColor),
-  bodyMedium: TextStyle(color: kBlackColor)
-)
-
-);
+    brightness: Brightness.light,
+    appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.white,
+        actionsIconTheme: IconThemeData(color: Colors.black)),
+    primarySwatch: Colors.red,
+    primaryColor: Colors.black,
+    scaffoldBackgroundColor: Colors.white,
+    fontFamily: 'SpaceGrotesk',
+    textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: Colors.black),
+        bodyMedium: TextStyle(color: Colors.black)));
 
 final darkTheme = ThemeData(
-  brightness: Brightness.dark,
-appBarTheme: const AppBarTheme(backgroundColor: kBlackColor),
-primarySwatch: Colors.red,
-primaryColor: kWhiteColor,
-scaffoldBackgroundColor: kBlackColor,
-fontFamily: 'SpaceGrotesk',
-textTheme: const TextTheme(
-  bodyLarge: TextStyle(color: kWhiteColor),
-  bodyMedium: TextStyle(color: kWhiteColor),
-  bodySmall: TextStyle(color: kWhiteColor),
-  
-  
-  
-)
-
-
-);
+    brightness: Brightness.dark,
+    appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.black,
+        actionsIconTheme: IconThemeData(color: Colors.white)),
+    primarySwatch: Colors.red,
+    primaryColor: Colors.white,
+    scaffoldBackgroundColor: Colors.black,
+    fontFamily: 'SpaceGrotesk',
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(color: Colors.white),
+      bodyMedium: TextStyle(color: Colors.white),
+      // bodySmall: TextStyle(color: Colors.white),
+    ));
