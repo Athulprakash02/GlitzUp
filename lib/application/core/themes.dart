@@ -25,7 +25,6 @@ final darkTheme = ThemeData(
         actionsIconTheme: IconThemeData(color: Colors.white)),
     primarySwatch: Colors.red,
     primaryColor: Colors.white,
-    
     scaffoldBackgroundColor: Colors.black,
     fontFamily: 'SpaceGrotesk',
     textTheme: const TextTheme(
