@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "883566400208",
+    "project_id": "glitzup-8966f",
+    "storage_bucket": "glitzup-8966f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883566400208:android:4b1d45b7e7bcde22c4c4d5",
+        "android_client_info": {
+          "package_name": "in.brototype.glitzup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883566400208-8c3mjjntpiks0uf4uas1fglupkruidoh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAt3ybE57L_nk0kH9jC6Cu-lUOtkI5fvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883566400208-8c3mjjntpiks0uf4uas1fglupkruidoh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
