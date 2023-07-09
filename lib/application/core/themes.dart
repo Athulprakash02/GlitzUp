@@ -10,6 +10,14 @@ final lightTheme = ThemeData(
         actionsIconTheme: IconThemeData(color: Colors.black)),
     primarySwatch: Colors.red,
     primaryColor: Colors.black,
+    tabBarTheme: const TabBarTheme(
+      labelStyle: TextStyle(fontSize: 18),
+
+       labelColor: Colors.red,
+                        unselectedLabelColor: Colors.black,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        dividerColor: Colors.black,
+    ),
     scaffoldBackgroundColor: Colors.white,
     fontFamily: 'SpaceGrotesk',
     
@@ -25,6 +33,13 @@ final darkTheme = ThemeData(
         actionsIconTheme: IconThemeData(color: Colors.white)),
     primarySwatch: Colors.red,
     primaryColor: Colors.white,
+    tabBarTheme: const TabBarTheme(
+      labelStyle: TextStyle(fontSize: 18),
+       labelColor: Colors.red,
+                        unselectedLabelColor: Colors.white,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        dividerColor: Colors.black,
+    ),
     scaffoldBackgroundColor: Colors.black,
     fontFamily: 'SpaceGrotesk',
     textTheme: const TextTheme(
