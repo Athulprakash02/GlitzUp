@@ -39,6 +39,7 @@ final darkTheme = ThemeData(
                         unselectedLabelColor: Colors.white,
                         indicatorSize: TabBarIndicatorSize.tab,
                         dividerColor: Colors.black,
+                        
     ),
     scaffoldBackgroundColor: Colors.black,
     fontFamily: 'SpaceGrotesk',
