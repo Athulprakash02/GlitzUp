@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glitzup/application/core/colors.dart';
+import 'package:glitzup/core/colors.dart';
 
 Widget postCard(Size size){
   return Padding(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:glitzup/application/core/colors.dart';
-import 'package:glitzup/application/core/constants.dart';
+import 'package:glitzup/core/colors.dart';
+import 'package:glitzup/core/constants.dart';
 
 class BottomNavBar extends StatefulWidget {
   BottomNavBar({super.key});

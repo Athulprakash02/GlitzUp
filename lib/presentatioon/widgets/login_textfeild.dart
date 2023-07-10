@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glitzup/application/core/colors.dart';
+import 'package:glitzup/core/colors.dart';
 
-Widget loginTextFeild(String hintText, bool obscureText) {
+Widget loginTextFeild(String hintText, bool obscureText,TextEditingController textController) {
   return TextFormField(
+    controller: textController,
     decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

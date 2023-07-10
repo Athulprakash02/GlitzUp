@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:glitzup/application/core/colors.dart';
+import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
 import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+
+   LoginScreen({super.key});
+
+  TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +26,16 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/login.png',
-                  width: size.width * .55,
+                  width: size.width * .4,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                loginTextFeild("Email or username", false),
+                loginTextFeild("Email or username", false,_emailTextController),
                 const SizedBox(
                   height: 20,
                 ),
-                loginTextFeild("Password", true),
+                loginTextFeild("Password", true,_passwordTextController),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

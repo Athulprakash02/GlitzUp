@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glitzup/application/core/colors.dart';
+import 'package:glitzup/core/colors.dart';
 
 class ProfilePageButton extends StatelessWidget {
   final text;
