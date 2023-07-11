@@ -1,15 +1,37 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glitzup/core/colors.dart';
-import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
+import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
 import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key});
 
-   LoginScreen({super.key});
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _emailTextController = TextEditingController();
+
   TextEditingController _passwordTextController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailTextController.dispose();
+    _passwordTextController.dispose();
+  }
+
+  void loginUser() {
+    FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+        email: _emailTextController.text,
+        password: _passwordTextController.text,
+        context: context).then((value) {
+         
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,32 +53,37 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                loginTextFeild("Email or username", false,_emailTextController),
+                loginTextFeild("Email Address", false, _emailTextController,
+                    validateEmail),
                 const SizedBox(
                   height: 20,
                 ),
-                loginTextFeild("Password", true,_passwordTextController),
+                loginTextFeild("Password", true, _passwordTextController,
+                    validatePassword),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
                         onPressed: () {},
                         child: const Text(
-                          'Forgot password?',style: TextStyle(color: kGreyColor),
+                          'Forgot password?',
+                          style: TextStyle(color: kGreyColor),
                         ))
                   ],
                 ),
                 // const SizedBox(height: 15,),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => BottomNavBar(),
-                          ),
-                          (route) => false);
+                      loginUser();
+                      // Navigator.of(context).pushAndRemoveUntil(
+                      //     MaterialPageRoute(
+                      //       builder: (context) => BottomNavBar(),
+                      //     ),
+                      //     (route) => false);
                     },
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                       child: Text(
                         "Login",
                         style: TextStyle(
