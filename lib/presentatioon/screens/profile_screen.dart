@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/widgets/profile_grid_view.dart';
 import 'package:glitzup/presentatioon/widgets/user_details.dart';
 
@@ -13,7 +15,12 @@ class ProfileScreen extends StatelessWidget {
         title: const Text(
           'username',
         ),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.menu))],
+        actions: [IconButton(onPressed: () async{
+         await FirebaseAuth.instance.signOut().then((value) {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen(),), (route) => false);
+         });
+
+        }, icon: const Icon(Icons.menu))],
       ),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {

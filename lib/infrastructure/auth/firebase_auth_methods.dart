@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
+import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 import 'package:glitzup/presentatioon/widgets/snackbar.dart';
 
 class FirebaseAuthMethods {
@@ -18,7 +20,13 @@ class FirebaseAuthMethods {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
-      );
+      ).then((value) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => LoginScreen(),
+      )).onError((error, stackTrace)  {
+        return const SnackBar(content: Text('data'));
+      });
+    });
       // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
       showSnackbar(context, e.message!);
@@ -35,7 +43,11 @@ class FirebaseAuthMethods {
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
-      );
+      ).then((value) {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => BottomNavBar(),
+      ));
+    });
       // if(_auth.currentUser!.emailVerified){
       //   showSnackbar(context, 'Email not verified');
       // }
