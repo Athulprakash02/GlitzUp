@@ -17,16 +17,20 @@ class FirebaseAuthMethods {
     required BuildContext context,
   }) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      await _auth
+          .createUserWithEmailAndPassword(
         email: email,
         password: password,
-      ).then((value) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => LoginScreen(),
-      )).onError((error, stackTrace)  {
-        return const SnackBar(content: Text('data'));
+      )
+          .then((value) {
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ))
+            .onError((error, stackTrace) {
+          return const SnackBar(content: Text('data'));
+        });
       });
-    });
       // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
       showSnackbar(context, e.message!);
@@ -40,14 +44,18 @@ class FirebaseAuthMethods {
       required String password,
       required BuildContext context}) async {
     try {
-      await _auth.signInWithEmailAndPassword(
+      await _auth
+          .signInWithEmailAndPassword(
         email: email,
         password: password,
-      ).then((value) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => BottomNavBar(),
-      ));
-    });
+      )
+          .then((value) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => BottomNavBar(),
+            ),
+            (route) => false);
+      });
       // if(_auth.currentUser!.emailVerified){
       //   showSnackbar(context, 'Email not verified');
       // }
@@ -89,5 +97,3 @@ String? validateEmail(String? value) {
     return null;
   }
 }
-
-

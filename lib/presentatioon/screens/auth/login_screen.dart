@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glitzup/core/colors.dart';
+import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
+import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 import 'package:glitzup/presentatioon/screens/home_screen.dart';
 import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -28,12 +31,42 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void loginUser() async {
-    await FirebaseAuthMethods(FirebaseAuth.instance)
-        .loginWithEmail(
-            email: _emailTextController.text,
-            password: _passwordTextController.text,
-            context: context);
-        
+    await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
+        email: _emailTextController.text,
+        password: _passwordTextController.text,
+        context: context);
+  }
+
+ 
+  GoogleSignInAccount? _user;
+  GoogleSignInAccount get user => _user!;
+
+  Future googleLogin() async {
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) {
+      return;
+    }
+    _user = googleUser;
+
+    final googleAuth = await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+   try {
+     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => BottomNavBar(),
+          ),
+          (route) => false);
+    });
+   } catch (e) {
+    print(e.toString());
+     
+   }
+
   }
 
   @override
@@ -79,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // const SizedBox(height: 15,),
                   ElevatedButton(
                       onPressed: () {
-                        if(_formkey.currentState!.validate()){
+                        if (_formkey.currentState!.validate()) {
                           loginUser();
                         }
                         // Navigator.of(context).pushAndRemoveUntil(
@@ -126,22 +159,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: AssetImage('assets/images/google.png'),
+                      GestureDetector(
+                        onTap: () {
+                          googleLogin();
+                        },
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage:
+                              AssetImage('assets/images/google.png'),
+                        ),
                       ),
                       SizedBox(
                         width: 40,
                       ),
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: AssetImage(
-                          'assets/images/facebook.png',
+                      GestureDetector(
+                        onTap: () {},
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage(
+                            'assets/images/facebook.png',
+                          ),
                         ),
                       ),
                     ],

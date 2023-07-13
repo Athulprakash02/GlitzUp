@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/widgets/profile_grid_view.dart';
 import 'package:glitzup/presentatioon/widgets/user_details.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -16,6 +18,7 @@ class ProfileScreen extends StatelessWidget {
           'username',
         ),
         actions: [IconButton(onPressed: () async{
+          await googleSignIn.disconnect();
          await FirebaseAuth.instance.signOut().then((value) {
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen(),), (route) => false);
          });
