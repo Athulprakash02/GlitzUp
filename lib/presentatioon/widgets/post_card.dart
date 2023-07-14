@@ -23,31 +23,45 @@ Widget postCard(Size size){
                   Container(
                     height: 280,
                     decoration: BoxDecoration(
-                        image: DecorationImage(image: AssetImage('assets/images/sachin.jpeg',),fit: BoxFit.cover),
+                        image: const DecorationImage(image: AssetImage('assets/images/sachin.jpeg',),fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(20)),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Row(
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                    Row(
                     children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Icon(
-                        Icons.favorite_border,size: 30,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(Icons.comment_bank_outlined,size: 30,),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(Icons.send,size: 30,),
-                      Spacer(),
-                      Icon(Icons.bookmark_border,size: 30,),
-                      SizedBox(
+                      IconButton(onPressed: () {
+                        
+                      }, icon: const Icon(Icons.favorite_outline,size: 28,)),
+                      IconButton(onPressed: () {
+                        
+                      }, icon: const Icon(Icons.comment_bank_outlined,size: 28,)),
+                      IconButton(onPressed: () {
+                        
+                      }, icon: const Icon(Icons.send,size: 28,)),
+                    //   SizedBox(
+                    //     width: 10,
+                    //   ),
+                    //   Icon(
+                    //     Icons.favorite_border,size: 30,
+                    //   ),
+                    //   SizedBox(
+                    //     width: 8,
+                    //   ),
+                    //   Icon(Icons.comment_bank_outlined,size: 30,),
+                    //   SizedBox(
+                    //     width: 8,
+                    //   ),
+                    //  Transform.rotate(
+                    //   angle: -45 * 0.0174533,
+                    //   child: Icon(Icons.send_rounded,size: 30,)),
+                      const Spacer(),
+                      // Icon(Icons.bookmark_border,size: 30,),
+                      IconButton(onPressed: () {
+                        
+                      }, icon: const Icon(Icons.bookmark_border,size: 28,)),
+                      const SizedBox(
                         width: 10,
                       ),
                     ],

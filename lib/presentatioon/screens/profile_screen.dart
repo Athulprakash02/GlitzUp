@@ -4,7 +4,6 @@ import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/widgets/profile_grid_view.dart';
 import 'package:glitzup/presentatioon/widgets/user_details.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

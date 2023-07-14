@@ -5,7 +5,7 @@ import 'package:glitzup/core/themes.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -20,15 +20,17 @@ class MyApp extends StatelessWidget {
       theme: MediaQuery.of(context).platformBrightness == Brightness.dark
           ? darkTheme
           : lightTheme,
-
-          debugShowCheckedModeBanner: false,
-          home: StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(),builder: (context, snapshot) {
-            if(snapshot.hasData){
-              return BottomNavBar();
-            }else{
-              return LoginScreen();
-            }
-          },) ,
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return BottomNavBar();
+          } else {
+            return LoginScreen();
+          }
+        },
+      ),
     );
   }
 }
