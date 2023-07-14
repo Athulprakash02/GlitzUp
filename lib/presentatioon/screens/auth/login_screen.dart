@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
@@ -31,6 +32,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void loginUser() async {
+    // showDialog(context: context,
+    //   barrierDismissible: false, builder: (BuildContext context) {
+    //     return Dialog(
+    //       backgroundColor: Colors.transparent,
+    //       child: Container(
+    //         color: Colors.transparent,
+    //         child:  SpinKitRing(
+    //           // duration: Duration(milliseconds: 500),
+    //               color: Theme.of(context).primaryColor,
+    //               size: 50,
+    //             ),
+                
+           
+    //       ),
+    //     );
+    //   },);
     await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
         email: _emailTextController.text,
         password: _passwordTextController.text,
@@ -113,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ElevatedButton(
                       onPressed: () {
                         if (_formkey.currentState!.validate()) {
+                          
                           loginUser();
                         }
                         // Navigator.of(context).pushAndRemoveUntil(

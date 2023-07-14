@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
@@ -31,6 +32,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void signupUser() async {
+     
    await FirebaseAuthMethods(FirebaseAuth.instance)
         .signUpWithEmail(
       email: _emailTextController.text,

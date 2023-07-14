@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:glitzup/presentatioon/widgets/user_tile.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -6,7 +8,27 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('search'),),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+        child: Column(
+          children: [
+            const CupertinoSearchTextField(
+             backgroundColor: Color.fromARGB(255, 65, 64, 64),
+             
+             
+            ),Expanded(
+              child: SizedBox(
+                child: ListView.builder(
+                  itemCount: 20 ,itemBuilder: (context, index) {
+                return   UserTile(text: 'username',);
+                },)
+                
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
+
