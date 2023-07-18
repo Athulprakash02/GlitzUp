@@ -9,7 +9,7 @@ final lightTheme = ThemeData(
         
         actionsIconTheme: IconThemeData(color: Colors.black)),
     primarySwatch: Colors.red,
-    primaryColor: Colors.black,
+    primaryColor: Colors.white,
     tabBarTheme: const TabBarTheme(
       labelStyle: TextStyle(fontSize: 18),
 
@@ -32,7 +32,7 @@ final darkTheme = ThemeData(
         backgroundColor: Colors.black,
         actionsIconTheme: IconThemeData(color: Colors.white)),
     primarySwatch: Colors.red,
-    primaryColor: Colors.white,
+    primaryColor: Colors.black,
     tabBarTheme: const TabBarTheme(
       labelStyle: TextStyle(fontSize: 18),
        labelColor: Colors.red,

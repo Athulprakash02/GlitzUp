@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
+import 'package:glitzup/presentatioon/screens/add%20profile/add_details_screen.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 import 'package:glitzup/presentatioon/widgets/snackbar.dart';
 
@@ -18,43 +18,46 @@ class FirebaseAuthMethods {
     required BuildContext context,
   }) async {
     try {
-      
-      showDialog(context: context,
-      barrierDismissible: false, builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          child: Container(
-            color: Colors.transparent,
-            child:  SpinKitRing(
-              // duration: Duration(milliseconds: 500),
-                  color: Theme.of(context).primaryColor,
-                  size: 50,
-                ),
-                
-           
-          ),
-        );
-      },);
-      
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              color: Colors.transparent,
+              child: SpinKitRing(
+                // duration: Duration(milliseconds: 500),
+                color: Theme.of(context).primaryColor,
+                size: 50,
+              ),
+            ),
+          );
+        },
+      );
+
       await _auth
           .createUserWithEmailAndPassword(
         email: email,
         password: password,
-      ).then((value) {
+      )
+          .then((value) {
         Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(
-          builder: (context) => LoginScreen(),
-        ))
+            .pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) =>  AddDetails(),
+                ),
+                (route) => false)
             .onError((error, stackTrace) {
           return const SnackBar(content: Text('data'));
         });
       });
       // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
-      Navigator.of(context,rootNavigator: true).pop();
+      Navigator.of(context, rootNavigator: true).pop();
       showSnackbar(context, e.message!);
-    // } finally {
-    //   Navigator.of(context,rootNavigator: true).pop();
+      // } finally {
+      //   Navigator.of(context,rootNavigator: true).pop();
     }
   }
 
@@ -65,23 +68,24 @@ class FirebaseAuthMethods {
       required String password,
       required BuildContext context}) async {
     try {
-        showDialog(context: context,
-      barrierDismissible: false, builder: (BuildContext context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          child: Container(
-            color: Colors.transparent,
-            child:  SpinKitRing(
-              //  duration:  Duration(seconds: 1),
-                  color: Theme.of(context).primaryColor,
-                  size: 50,
-                ),
-                
-           
-          ),
-        );
-      },);
-     
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              color: Colors.transparent,
+              child: SpinKitRing(
+                //  duration:  Duration(seconds: 1),
+                color: Theme.of(context).primaryColor,
+                size: 50,
+              ),
+            ),
+          );
+        },
+      );
+
       // await Future.delayed(Duration(milliseconds: 500));
       await _auth
           .signInWithEmailAndPassword(
@@ -99,7 +103,7 @@ class FirebaseAuthMethods {
       //   showSnackbar(context, 'Email not verified');
       // }
     } on FirebaseAuthException catch (e) {
-      Navigator.of(context,rootNavigator: true).pop();
+      Navigator.of(context, rootNavigator: true).pop();
       showSnackbar(context, e.message!);
     }
     // finally{

@@ -83,11 +83,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   // const SizedBox(
                   //   height: 20,
                   // ),
-                  loginTextFeild('Email Address', false, _emailTextController,validateEmail),
+                  loginTextFeild('Email Address', false, _emailTextController,validateEmail,context),
                   const SizedBox(
                     height: 20,
                   ),
-                  loginTextFeild('Password', true, _passwordTextController,validatePassword),
+                  loginTextFeild('Password', true, _passwordTextController,validatePassword,context),
                   const SizedBox(
                     height: 20,
                   ),

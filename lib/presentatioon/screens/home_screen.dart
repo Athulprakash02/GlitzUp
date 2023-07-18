@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glitzup/presentatioon/screens/add%20profile/add_details_screen.dart';
 
 import 'package:glitzup/presentatioon/widgets/post_card.dart';
 
@@ -20,7 +21,9 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddDetails(),));
+            },
             icon: const Icon(Icons.messenger_outline_rounded),
           ),
         ],

@@ -107,12 +107,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   loginTextFeild("Email Address", false, _emailTextController,
-                      validateEmail),
+                      validateEmail,context),
                   const SizedBox(
                     height: 20,
                   ),
                   loginTextFeild("Password", true, _passwordTextController,
-                      validatePassword),
+                      validatePassword,context),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
