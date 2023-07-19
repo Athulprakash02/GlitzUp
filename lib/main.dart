@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:glitzup/core/themes.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       theme: MediaQuery.of(context).platformBrightness == Brightness.dark
           ? darkTheme
           : lightTheme,

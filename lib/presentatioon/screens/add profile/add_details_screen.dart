@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:glitzup/application/user%20controller/user_controller.dart';
+import 'package:glitzup/domain/user%20model/user_model.dart';
+import 'package:glitzup/infrastructure/user_details.dart';
 
 import 'widgets/details_text_feild.dart';
 
@@ -9,22 +13,36 @@ class AddDetails extends StatelessWidget {
   TextEditingController userNameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
 
+  final UserController userController = Get.put(UserController());
+
   @override
   Widget build(BuildContext context) {
+    
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add profile'),
         centerTitle: true,
-
         actions: [
-          TextButton(onPressed: () {
-            
-          }, child: Text('Save',style: TextStyle(fontSize: 18),))
+          TextButton(
+              onPressed: () {
+                print('pressed');
+                final user = UserModel(
+                    fullName: fullNameController.text.trim(),
+                    userName: userNameController.text.trim(),
+                    bio: bioController.text.trim() ?? 'no bioi');
+                   
+                    saveUserData(user,context);
+                    
+              },
+              child: const Text(
+                'Save',
+                style: TextStyle(fontSize: 18),
+              ))
         ],
       ),
       body: Padding(
-        padding:  EdgeInsets.all(size.width/16),
+        padding: EdgeInsets.all(size.width / 16),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -45,17 +63,34 @@ class AddDetails extends StatelessWidget {
                         ))
                   ],
                 ),
-                const SizedBox(height: 25,),
-                DetailsTextFeild(nameController: fullNameController, hintText: 'Full name', obscureText: false,maxLines: 1),
-                const SizedBox(height: 25,),
-                DetailsTextFeild(nameController: userNameController, hintText: 'username', obscureText: false,maxLines: 1),
-                const SizedBox(height: 25,),
-                DetailsTextFeild(nameController: bioController, hintText: 'Bio', obscureText: false,maxLines: 6,),
-                              const SizedBox(height: 20,),
-                             
-          
-          
-          
+                const SizedBox(
+                  height: 25,
+                ),
+                DetailsTextFeild(
+                    nameController: fullNameController,
+                    hintText: 'Full name',
+                    obscureText: false,
+                    maxLines: 1),
+                const SizedBox(
+                  height: 25,
+                ),
+                DetailsTextFeild(
+                    nameController: userNameController,
+                    hintText: 'username',
+                    obscureText: false,
+                    maxLines: 1),
+                const SizedBox(
+                  height: 25,
+                ),
+                DetailsTextFeild(
+                  nameController: bioController,
+                  hintText: 'Bio',
+                  obscureText: false,
+                  maxLines: 6,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
