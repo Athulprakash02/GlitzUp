@@ -59,7 +59,7 @@ Future<void> imagePick() async {
 
       
       try {
-        referenceImageToUpload.putFile(File(imagePicked.path));
+       await referenceImageToUpload.putFile(File(imagePicked.path));
         imageUrl =await referenceImageToUpload.getDownloadURL();
       } catch (e) {
         
