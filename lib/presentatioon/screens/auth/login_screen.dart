@@ -30,22 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void loginUser() async {
-    // showDialog(context: context,
-    //   barrierDismissible: false, builder: (BuildContext context) {
-    //     return Dialog(
-    //       backgroundColor: Colors.transparent,
-    //       child: Container(
-    //         color: Colors.transparent,
-    //         child:  SpinKitRing(
-    //           // duration: Duration(milliseconds: 500),
-    //               color: Theme.of(context).primaryColor,
-    //               size: 50,
-    //             ),
-                
-           
-    //       ),
-    //     );
-    //   },);
     await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
         email: _emailTextController.text,
         password: _passwordTextController.text,

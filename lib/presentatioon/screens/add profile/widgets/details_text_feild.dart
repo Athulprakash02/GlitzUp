@@ -5,13 +5,14 @@ import 'package:glitzup/core/colors.dart';
 class DetailsTextFeild extends StatelessWidget {
   const DetailsTextFeild({
     super.key,
-    required this.nameController, required this.hintText, required this.obscureText, required this.maxLines,
+    required this.nameController, required this.hintText, required this.obscureText, required this.maxLines,  this.validate,
   });
 
   final TextEditingController nameController;
   final String hintText;
   final bool obscureText;
   final int maxLines;
+  final String? Function(String?)? validate;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +49,8 @@ class DetailsTextFeild extends StatelessWidget {
             labelText: hintText
             // hintText: hintText,
             ),
-        obscureText: obscureText
-        // validator: validator,
+        obscureText: obscureText,
+        validator: validate,
       ),
     );
   }
