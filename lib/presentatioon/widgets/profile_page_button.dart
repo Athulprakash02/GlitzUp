@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:glitzup/core/colors.dart';
 
 class ProfilePageButton extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final text;
-   ProfilePageButton({
+   const ProfilePageButton({
     super.key,required this.text,
   });
 

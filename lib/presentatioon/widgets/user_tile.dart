@@ -4,7 +4,7 @@ import 'package:glitzup/core/colors.dart';
 class UserTile extends StatelessWidget {
   final String text;
   final String? time;
-  UserTile({
+  const UserTile({
     super.key,
     required this.text,
     this.time,
@@ -21,7 +21,7 @@ class UserTile extends StatelessWidget {
           title: RichText(
               text: TextSpan(children: [
             TextSpan(text: text),
-            TextSpan(text: '  ' + (time?? ''), style: TextStyle(color: kGreyColor))
+            TextSpan(text: '  ${time?? ''}', style: const TextStyle(color: kGreyColor))
           ]))),
     );
   }

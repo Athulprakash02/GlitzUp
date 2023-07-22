@@ -44,6 +44,8 @@ dependencies:
   get: ^4.6.5
   image_picker: ^1.0.1
   firebase_storage: ^11.2.5
+  email_otp: ^2.0.1
+  
   # flutter_facebook_auth: ^6.0.0
 
 dev_dependencies:

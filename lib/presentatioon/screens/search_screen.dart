@@ -20,7 +20,7 @@ class SearchScreen extends StatelessWidget {
               child: SizedBox(
                 child: ListView.builder(
                   itemCount: 20 ,itemBuilder: (context, index) {
-                return   UserTile(text: 'username',);
+                return   const UserTile(text: 'username',);
                 },)
                 
               ),

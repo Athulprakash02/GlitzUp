@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddDetails(),));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddDetails(),));
             },
             icon: const Icon(Icons.messenger_outline_rounded),
           ),

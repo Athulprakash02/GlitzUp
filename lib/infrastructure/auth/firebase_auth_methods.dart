@@ -1,3 +1,4 @@
+import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,7 +12,6 @@ class FirebaseAuthMethods {
   FirebaseAuthMethods(this._auth);
 
   //Email Sign Up
-
   Future<void> signUpWithEmail({
     required String email,
     required String password,
@@ -36,30 +36,52 @@ class FirebaseAuthMethods {
         },
       );
 
+      // await emailVerification(email, context);
+
+      // Wait for the user to verify their email before proceeding
+      // await _auth
+      //     .authStateChanges()
+      //     .firstWhere((user) => user?.emailVerified == true);
+
+      // The user's email is now verified, proceed with creating the user
       await _auth
           .createUserWithEmailAndPassword(
         email: email,
         password: password,
       )
           .then((value) {
-        Navigator.of(context)
-            .pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) =>  AddDetails(),
-                ),
-                (route) => false)
-            .onError((error, stackTrace) {
-          return const SnackBar(content: Text('data'));
-        });
+        Navigator.of(context, rootNavigator: true)
+            .pop(); // Close the loading dialog
+
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const AddDetails(),
+          ),
+          (route) => false,
+        );
       });
-      // await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
       Navigator.of(context, rootNavigator: true).pop();
       showSnackbar(context, e.message!);
-      // } finally {
-      //   Navigator.of(context,rootNavigator: true).pop();
     }
   }
+
+  // Future<void> emailVerification(String email, BuildContext context) async {
+  //   try {
+  //     await _auth.createUserWithEmailAndPassword(
+  //       email: email,
+  //       password: 'TempPassword',
+  //     );
+
+  //     final user = _auth.currentUser;
+  //     if (user != null) {
+  //       await user.sendEmailVerification();
+  //       showSnackbar(context, 'Email verification sent!');
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     showSnackbar(context, e.message!);
+  //   }
+  // }
 
   //Email login
 
@@ -87,21 +109,46 @@ class FirebaseAuthMethods {
       );
 
       // await Future.delayed(Duration(milliseconds: 500));
-      await _auth
-          .signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      )
-          .then((value) {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => BottomNavBar(),
-            ),
-            (route) => false);
-      });
-      // if(_auth.currentUser!.emailVerified){
-      //   showSnackbar(context, 'Email not verified');
+      //   await _auth
+      //       .signInWithEmailAndPassword(
+      //     email: email,
+      //     password: password,
+      //   )
+      //       .then((value) {
+      //     Navigator.of(context).pushAndRemoveUntil(
+      //         MaterialPageRoute(
+      //           builder: (context) => BottomNavBar(),
+      //         ),
+      //         (route) => false);
+      //   });
+      //   // if(_auth.currentUser!.emailVerified){
+      //   //   showSnackbar(context, 'Email not verified');
+      //   // }
+      // } on FirebaseAuthException catch (e) {
+      //   Navigator.of(context, rootNavigator: true).pop();
+      //   showSnackbar(context, e.message!);
       // }
+
+      // UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      //   email: email,
+      //   password: password,
+      // );
+
+      // Check if the user's email is verified
+      // if (!userCredential.user!.emailVerified) {
+      //   // If the email is not verified, send the verification email
+      //   await emailVerification(email, context);
+      //   Navigator.of(context, rootNavigator: true)
+      //       .pop(); // Close the loading dialog
+      //   return;
+      // }
+
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const BottomNavBar(),
+        ),
+        (route) => false,
+      );
     } on FirebaseAuthException catch (e) {
       Navigator.of(context, rootNavigator: true).pop();
       showSnackbar(context, e.message!);
@@ -110,17 +157,6 @@ class FirebaseAuthMethods {
     //   Navigator.of(context,rootNavigator: true).pop();
     // }
   }
-
-  //Email verification
-
-  // Future<void> sendEmailVerification(BuildContext context) async {
-  //   try {
-  //     _auth.currentUser!.sendEmailVerification();
-  //     showSnackbar(context, 'Email verification sent!');
-  //   } on FirebaseAuthException catch (e) {
-  //     showSnackbar(context, e.message!);
-  //   }
-  // }
 }
 
 String? validatePassword(String? value) {
@@ -143,4 +179,47 @@ String? validateEmail(String? value) {
   } else {
     return null;
   }
+}
+
+String? validateOTP(String? value) {
+  if (value!.isEmpty) {
+    return 'please enter OTP';
+  } else {
+    return null;
+  }
+}
+
+final emailAuth = EmailOTP();
+
+void sendOTP(String email, BuildContext context) async {
+  emailAuth.setConfig(
+      appEmail: "me@rohitchouhan.com",
+      appName: "GlitsUp",
+      userEmail: email,
+      otpLength: 6,
+      otpType: OTPType.digitsOnly);
+  // var res = await emailAuth.sendOtp(recipientMail: email);
+  if (await emailAuth.sendOTP() == true) {
+    // ignore: use_build_context_synchronously
+    showSnackbar(context, 'OTP send succesfully');
+  } else {
+    // ignore: use_build_context_synchronously
+    showSnackbar(context, 'Please try again');
+  }
+}
+
+bool verifyOTP(String email, String userOtp, BuildContext context) {
+// var res = emailAuth.validateOtp(recipientMail: email, userOtp: userOtp);
+
+  if (emailAuth.verifyOTP(otp: userOtp) == true) {
+    showSnackbar(context, 'Otp verified');
+    return true;
+  } else {
+    showSnackbar(context, 'Invalid OTP');
+    return false;
+  }
+}
+
+void clearText(TextEditingController textController) {
+  textController.clear();
 }

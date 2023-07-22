@@ -9,21 +9,20 @@ import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
 
-  TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailTextController.dispose();
     _passwordTextController.dispose();
@@ -57,12 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
      await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => BottomNavBar(),
+            builder: (context) => const BottomNavBar(),
           ),
           (route) => false);
     });
+   // ignore: empty_catches
    } catch (e) {
-    print(e.toString());
      
    }
 
@@ -90,13 +89,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  loginTextFeild("Email Address", false, _emailTextController,
-                      validateEmail,context),
+                  loginTextFeild("Email", false, _emailTextController,
+                      validateEmail,context,const Icon(Icons.clear,size: 16,),),
                   const SizedBox(
                     height: 20,
                   ),
                   loginTextFeild("Password", true, _passwordTextController,
-                      validatePassword,context),
+                      validatePassword,context,const Icon(Icons.clear,size: 16,),),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -166,19 +165,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () {
                           googleLogin();
                         },
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           radius: 20,
                           backgroundColor: Colors.transparent,
                           backgroundImage:
                               AssetImage('assets/images/google.png'),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 40,
                       ),
                       GestureDetector(
                         onTap: () {},
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           radius: 20,
                           backgroundColor: Colors.transparent,
                           backgroundImage: AssetImage(
@@ -201,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignupScreen(),
+                              builder: (context) => const SignupScreen(),
                             ));
                           },
                           child: const Text(

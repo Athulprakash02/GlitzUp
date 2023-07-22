@@ -24,7 +24,7 @@ class DetailsTextFeild extends StatelessWidget {
         color: Colors.grey.withOpacity(0.2), // Shadow color
         spreadRadius: 2, // Spread radius
         blurRadius: 5, // Blur radius
-        offset: Offset(0, 3), 
+        offset: const Offset(0, 3), 
         blurStyle: BlurStyle.inner
       ),
     ],

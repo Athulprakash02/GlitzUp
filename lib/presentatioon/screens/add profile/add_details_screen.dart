@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/application/user%20controller/user_controller.dart';
 import 'package:glitzup/domain/user%20model/user_model.dart';
+import 'package:glitzup/infrastructure/users/add_image.dart';
 import 'package:glitzup/infrastructure/users/user_details.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,7 +12,7 @@ import 'widgets/details_text_feild.dart';
 
 // ignore: must_be_immutable
 class AddDetails extends StatefulWidget {
-  AddDetails({super.key});
+  const AddDetails({super.key});
 
   @override
   State<AddDetails> createState() => _AddDetailsState();
@@ -29,11 +29,10 @@ class _AddDetailsState extends State<AddDetails> {
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   String? imagePath;
-  String? imageUrl = "";
+  String? imageUrl;
 
   // @override
   // void dispose() {
-  //   // TODO: implement dispose
   //   super.dispose();
   //   fullNameController.dispose();
   //   userController.dispose();
@@ -50,20 +49,7 @@ Future<void> imagePick() async {
         imagePath = imagePicked.path;
       });
       
-     Reference referenceRoot = FirebaseStorage.instance.ref();
-     Reference referenceDirImages = referenceRoot.child('images');
-
-     String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-
-     Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
-
-      
-      try {
-       await referenceImageToUpload.putFile(File(imagePicked.path));
-        imageUrl =await referenceImageToUpload.getDownloadURL();
-      } catch (e) {
-        
-      }
+    imageUrl =await addProfileImge(imagePicked);
     }
      
   }
@@ -83,9 +69,10 @@ Future<void> imagePick() async {
                 onPressed: () {
                    if(_formkey.currentState!.validate()){
                     final user = UserModel(
+                      imagePath: imageUrl!=null ? imageUrl!:'assets/images/download.png',
                     fullName: fullNameController.text.trim(),
                     userName: userNameController.text.trim(),
-                    bio: bioController.text.trim() ?? 'no bioi');
+                    bio:bioController.text.isNotEmpty? bioController.text.trim() : '');
                    
                     saveUserData(user,context);
                    }
@@ -110,7 +97,7 @@ Future<void> imagePick() async {
                     children: [
                       CircleAvatar(
                         radius: 55,
-                        backgroundImage: imagePath == null ? AssetImage('assets/images/download.png') as ImageProvider:FileImage(File(imagePath!)),
+                        backgroundImage: imagePath == null ? const AssetImage('assets/images/download.png') as ImageProvider:FileImage(File(imagePath!)),
                       ),
                       Positioned(
                         
@@ -120,7 +107,7 @@ Future<void> imagePick() async {
                             onTap: () {
                               imagePick();
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.add_a_photo,
                               size: 30,
                             ),

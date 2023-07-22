@@ -3,7 +3,7 @@ import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/core/constants.dart';
 
 class BottomNavBar extends StatefulWidget {
-  BottomNavBar({super.key});
+  const BottomNavBar({super.key});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();

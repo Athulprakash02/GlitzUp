@@ -31,7 +31,7 @@ class UserDetails extends StatelessWidget {
             ),
              Text(
               userName,
-              style: TextStyle(fontSize: 22),
+              style: const TextStyle(fontSize: 22),
             ),
             const SizedBox(
               height: 10,

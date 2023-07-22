@@ -3,13 +3,12 @@ import 'package:get/get.dart';
 import 'package:glitzup/application/user%20controller/user_controller.dart';
 import 'package:glitzup/domain/user%20model/user_model.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
-import 'package:glitzup/presentatioon/screens/home_screen.dart';
 
 final userRepo = Get.put(UserController());
 Future<void> saveUserData(UserModel user, BuildContext context) async {
   await userRepo.createUser(user);
 
-  Get.offAll(() =>  BottomNavBar());
+  Get.offAll(() =>  const BottomNavBar());
 }
 
 String? validateFullName(String? value) {

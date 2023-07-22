@@ -7,10 +7,10 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('notifications',style: TextStyle(fontSize: 25),),),
+      appBar: AppBar(title: const Text('notifications',style: TextStyle(fontSize: 25),),),
       body:  ListView.builder(
                   itemCount: 20 ,itemBuilder: (context, index) {
-                return   UserTile(text: 'atx.ul_ liked your post',time: '1h', );
+                return   const UserTile(text: 'atx.ul_ liked your post',time: '1h', );
                 },) ,
     );
   }

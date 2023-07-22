@@ -7,6 +7,10 @@ import 'package:glitzup/presentatioon/widgets/user_details.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
+   
+   
+  
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class ProfileScreen extends StatelessWidget {
         actions: [IconButton(onPressed: () async{
            googleSignIn.disconnect();
          await FirebaseAuth.instance.signOut().then((value) {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen(),), (route) => false);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen(),), (route) => false);
          });
 
         }, icon: const Icon(Icons.menu))],
@@ -114,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             UserDetails(
                 size: size,
-                userName: 'userName',
+                userName: 'username',
                 bio: 'bio',
                 buttonText: 'Edit profile'),
           ];

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 
+// ignore: must_be_immutable
 class OTPScreen extends StatelessWidget {
-   OTPScreen({super.key});
+   const OTPScreen({super.key});
 
-  TextEditingController _otpTextController = TextEditingController();
   
 
   @override
@@ -35,7 +35,7 @@ class OTPScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                            builder: (context) =>  LoginScreen(),
+                            builder: (context) =>  const LoginScreen(),
                           ),
                           (route) => false);
                     },

@@ -8,10 +8,8 @@ class UserController extends GetxController {
   final _db = FirebaseFirestore.instance;
 
   createUser(UserModel user) async {
-    print('second ivde vannu');
     await _db
         .collection("Users")
         .add(user.toJson());
-        print('kainj');
   }
 }
