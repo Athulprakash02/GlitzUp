@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glitzup/core/constants.dart';
+import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/widgets/profile_grid_view.dart';
 import 'package:glitzup/presentatioon/widgets/user_details.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -14,16 +16,17 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.read<FirebaseAuthMethods>().currentUser;
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'username',
+        title:  Text(
+          user!.uid,
         ),
         actions: [IconButton(onPressed: () async{
            googleSignIn.disconnect();
          await FirebaseAuth.instance.signOut().then((value) {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginScreen(),), (route) => false);
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  LoginScreen(),), (route) => false);
          });
 
         }, icon: const Icon(Icons.menu))],

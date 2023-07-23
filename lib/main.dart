@@ -3,8 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/core/themes.dart';
-import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
-import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
+import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
+import 'package:glitzup/presentatioon/screens/auth/authwrapper.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,21 +18,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: MediaQuery.of(context).platformBrightness == Brightness.dark
-          ? darkTheme
-          : lightTheme,
-      debugShowCheckedModeBanner: false,
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const BottomNavBar();
-          } else {
-            return const LoginScreen();
-          }
-        },
-      ),
+    return MultiProvider(
+      providers: [
+        Provider<FirebaseAuthMethods>(
+          create: (_) => FirebaseAuthMethods(FirebaseAuth.instance),
+        ),
+        
+        StreamProvider(
+            create: (context) => context.read<FirebaseAuthMethods>().authState,
+            initialData: null)
+      ],
+      child: GetMaterialApp(
+          theme: MediaQuery.of(context).platformBrightness == Brightness.dark
+              ? darkTheme
+              : lightTheme,
+          debugShowCheckedModeBanner: false,
+          home: const AuthWrapper()),
     );
   }
 }

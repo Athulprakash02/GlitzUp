@@ -2,14 +2,22 @@ import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/presentatioon/screens/add%20profile/add_details_screen.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 import 'package:glitzup/presentatioon/widgets/snackbar.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthMethods {
   final FirebaseAuth _auth;
 
   FirebaseAuthMethods(this._auth);
+
+  User? get currentUser => _auth.currentUser;
+
+  Stream<User?> get authState => _auth.authStateChanges();
+
+  
 
   //Email Sign Up
   Future<void> signUpWithEmail({
@@ -66,22 +74,8 @@ class FirebaseAuthMethods {
     }
   }
 
-  // Future<void> emailVerification(String email, BuildContext context) async {
-  //   try {
-  //     await _auth.createUserWithEmailAndPassword(
-  //       email: email,
-  //       password: 'TempPassword',
-  //     );
-
-  //     final user = _auth.currentUser;
-  //     if (user != null) {
-  //       await user.sendEmailVerification();
-  //       showSnackbar(context, 'Email verification sent!');
-  //     }
-  //   } on FirebaseAuthException catch (e) {
-  //     showSnackbar(context, e.message!);
-  //   }
-  // }
+  
+  
 
   //Email login
 
@@ -109,40 +103,21 @@ class FirebaseAuthMethods {
       );
 
       // await Future.delayed(Duration(milliseconds: 500));
-      //   await _auth
-      //       .signInWithEmailAndPassword(
-      //     email: email,
-      //     password: password,
-      //   )
-      //       .then((value) {
-      //     Navigator.of(context).pushAndRemoveUntil(
-      //         MaterialPageRoute(
-      //           builder: (context) => BottomNavBar(),
-      //         ),
-      //         (route) => false);
-      //   });
-      //   // if(_auth.currentUser!.emailVerified){
-      //   //   showSnackbar(context, 'Email not verified');
-      //   // }
-      // } on FirebaseAuthException catch (e) {
-      //   Navigator.of(context, rootNavigator: true).pop();
-      //   showSnackbar(context, e.message!);
-      // }
+        await _auth
+            .signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        )
+            .then((value) {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const BottomNavBar(),
+              ),
+              (route) => false);
+        });
+      
 
-      // UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-      //   email: email,
-      //   password: password,
-      // );
-
-      // Check if the user's email is verified
-      // if (!userCredential.user!.emailVerified) {
-      //   // If the email is not verified, send the verification email
-      //   await emailVerification(email, context);
-      //   Navigator.of(context, rootNavigator: true)
-      //       .pop(); // Close the loading dialog
-      //   return;
-      // }
-
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
           builder: (context) => const BottomNavBar(),
@@ -156,6 +131,37 @@ class FirebaseAuthMethods {
     // finally{
     //   Navigator.of(context,rootNavigator: true).pop();
     // }
+  }
+
+  GoogleSignInAccount? _user;
+  GoogleSignInAccount get user => _user!;
+
+  Future googleLogin(BuildContext context) async {
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) {
+      return;
+    }
+    _user = googleUser;
+
+    final googleAuth = await googleUser.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+   try {
+     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const BottomNavBar(),
+          ),
+          (route) => false);
+    });
+   // ignore: empty_catches
+   } catch (e) {
+     
+   }
+
   }
 }
 

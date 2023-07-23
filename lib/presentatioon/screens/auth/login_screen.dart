@@ -1,15 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glitzup/core/colors.dart';
-import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
-import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+   LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -21,52 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordTextController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  @override
-  void dispose() {
-    super.dispose();
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
-  }
 
-  void loginUser() async {
-    await FirebaseAuthMethods(FirebaseAuth.instance).loginWithEmail(
-        email: _emailTextController.text,
-        password: _passwordTextController.text,
-        context: context);
-  }
-
- 
-  GoogleSignInAccount? _user;
-  GoogleSignInAccount get user => _user!;
-
-  Future googleLogin() async {
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) {
-      return;
-    }
-    _user = googleUser;
-
-    final googleAuth = await googleUser.authentication;
-
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-   try {
-     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const BottomNavBar(),
-          ),
-          (route) => false);
-    });
-   // ignore: empty_catches
-   } catch (e) {
-     
-   }
-
-  }
-
+  // @override
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -89,13 +42,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  loginTextFeild("Email", false, _emailTextController,
-                      validateEmail,context,const Icon(Icons.clear,size: 16,),),
+                  loginTextFeild(
+                    "Email",
+                    false,
+                    _emailTextController,
+                    validateEmail,
+                    context,
+                    const Icon(
+                      Icons.clear,
+                      size: 16,
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
-                  loginTextFeild("Password", true, _passwordTextController,
-                      validatePassword,context,const Icon(Icons.clear,size: 16,),),
+                  loginTextFeild(
+                    "Password",
+                    true,
+                    _passwordTextController,
+                    validatePassword,
+                    context,
+                    const Icon(
+                      Icons.clear,
+                      size: 16,
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -111,8 +82,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ElevatedButton(
                       onPressed: () {
                         if (_formkey.currentState!.validate()) {
-                          
-                          loginUser();
+                          // loginUser();
+                          context.read<FirebaseAuthMethods>().loginWithEmail(
+                              email: _emailTextController.text.trim(),
+                              password: _passwordTextController.text.trim(),
+                              context: context);
                         }
                         // Navigator.of(context).pushAndRemoveUntil(
                         //     MaterialPageRoute(
@@ -163,7 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          googleLogin();
+                          context
+                              .read<FirebaseAuthMethods>()
+                              .googleLogin(context);
                         },
                         child: const CircleAvatar(
                           radius: 20,
@@ -200,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextButton(
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const SignupScreen(),
+                              builder: (context) =>  SignupScreen(),
                             ));
                           },
                           child: const Text(

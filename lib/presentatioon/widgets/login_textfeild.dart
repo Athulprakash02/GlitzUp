@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
+  
 
 
 Widget loginTextFeild(String hintText, bool obscureText,
     TextEditingController textController, String? Function(String? value) validator,BuildContext context,Widget suffix,[String? email]) {
+  
   return Container(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -31,7 +33,10 @@ Widget loginTextFeild(String hintText, bool obscureText,
             if(hintText == 'Email' || hintText == 'Password' ){
               clearText(textController);
             }else if(hintText == 'otp'){
-             hiddentextFeild = verifyOTP(email!, textController.text, context);
+              
+            hiddentextFeild = verifyOTP(email!, textController.text, context);
+            
+
             }else if(hintText == 'Email Address'){
               sendOTP(textController.text, context);
             }
@@ -44,12 +49,8 @@ Widget loginTextFeild(String hintText, bool obscureText,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: kRedColor)),
-          // enabledBorder: OutlineInputBorder(
-          //   borderRadius: BorderRadius.circular(10),
-          //   borderSide: const BorderSide(color:kBlackColor),
-          // ),
+          
           labelText: hintText
-          // hintText: hintText,
           ),
       obscureText: obscureText,
       validator: validator,
