@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/application/user%20controller/user_controller.dart';
 import 'package:glitzup/domain/user%20model/user_model.dart';
+import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/infrastructure/users/add_image.dart';
 import 'package:glitzup/infrastructure/users/user_details.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/details_text_feild.dart';
 
@@ -56,6 +58,7 @@ Future<void> imagePick() async {
 
   @override
   Widget build(BuildContext context) {
+     final signeduser = context.read<FirebaseAuthMethods>().currentUser;
     
     Size size = MediaQuery.sizeOf(context);
     return Form(
@@ -69,6 +72,7 @@ Future<void> imagePick() async {
                 onPressed: () {
                    if(_formkey.currentState!.validate()){
                     final user = UserModel(
+                      email: signeduser!.email!,
                       imagePath: imageUrl!=null ? imageUrl!:'assets/images/download.png',
                     fullName: fullNameController.text.trim(),
                     userName: userNameController.text.trim(),
