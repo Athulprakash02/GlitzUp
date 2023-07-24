@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:glitzup/application/showtextfeild%20provider/show_textfeild_provider.dart';
 import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
+import 'package:provider/provider.dart';
   
 
 
@@ -23,7 +25,13 @@ Widget loginTextFeild(String hintText, bool obscureText,
       ),
     child: TextFormField(
       controller: textController,
-      
+      onChanged: (value) {
+        if(hintText == 'otp'){
+          if(textController.text.isEmpty){
+            Provider.of<ShowTextFeildProvider>(context,listen: false).toggleVisbility(false);
+          }
+        }
+      },
       decoration: InputDecoration(
         fillColor: Theme.of(context).primaryColor,
         filled: true,
@@ -35,6 +43,10 @@ Widget loginTextFeild(String hintText, bool obscureText,
             }else if(hintText == 'otp'){
               
             hiddentextFeild = verifyOTP(email!, textController.text, context);
+            if(hiddentextFeild){
+
+              Provider.of<ShowTextFeildProvider>(context,listen: false).toggleVisbility(true);
+            }
             
 
             }else if(hintText == 'Email Address'){
