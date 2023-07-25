@@ -8,7 +8,7 @@ import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
-   LoginScreen({super.key});
+   const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

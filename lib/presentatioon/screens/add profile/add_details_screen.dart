@@ -117,13 +117,7 @@ Future<void> imagePick() async {
                             ),
                           ))
 
-                  //          CircleAvatar(
-                  //   radius: 70,
-                  //   backgroundImage: imagePath == null
-                  //       ? const AssetImage('assets/images/download.png')
-                  //           as ImageProvider
-                  //       : FileImage(File(imagePath!)),
-                  // ),
+                
                     ],
                   ),
                   const SizedBox(

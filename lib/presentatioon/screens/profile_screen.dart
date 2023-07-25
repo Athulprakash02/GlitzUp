@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
       future: getUserDataByEmail(FirebaseAuth.instance.currentUser!.email!),
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.waiting){
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }else if(snapshot.hasError){
           return Text('Error: ${snapshot.error}');
         }else if(snapshot.hasData && snapshot.data != null){
@@ -35,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
           actions: [IconButton(onPressed: () async{
              googleSignIn.disconnect();
            await FirebaseAuth.instance.signOut().then((value) {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  LoginScreen(),), (route) => false);
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  const LoginScreen(),), (route) => false);
            });
     
           }, icon: const Icon(Icons.menu))],
@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
         ),
       );
         }else{
-          return Text('data');
+          return const Text('data');
         }
         
       }
