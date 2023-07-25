@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:glitzup/application/showtextfeild%20provider/show_textfeild_provider.dart';
+import 'package:glitzup/application/text%20feild%20validator%20provider/textfeild_validator_rovider.dart';
 import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
@@ -8,7 +10,7 @@ import 'package:provider/provider.dart';
 
 
 Widget loginTextFeild(String hintText, bool obscureText,
-    TextEditingController textController, String? Function(String? value) validator,BuildContext context,Widget suffix,[String? email]) {
+    TextEditingController textController,BuildContext context,Widget suffix,{required String? Function(String?) validator,String? email, }) {
   
   return Container(
     decoration: BoxDecoration(
@@ -23,13 +25,20 @@ Widget loginTextFeild(String hintText, bool obscureText,
       ),
     ],
       ),
-    child: TextFormField(
+    child: FormBuilderTextField(
+      
+      name: hintText,
       controller: textController,
       onChanged: (value) {
-        if(hintText == 'otp'){
+        if(hintText == 'otp' && textController.text.isEmpty){
+           context.read<TextfieldValidatorProvider>().updateOTP(value!);
           if(textController.text.isEmpty){
             Provider.of<ShowTextFeildProvider>(context,listen: false).toggleVisbility(false);
           }
+        }else if(hintText == 'email' && textController.text.isEmpty){
+          context.read<TextfieldValidatorProvider>().updateEmail(value!);
+        }else if(hintText == 'password' && textController.text.isEmpty){
+          context.read<TextfieldValidatorProvider>().updatePassword(value!);
         }
       },
       decoration: InputDecoration(
@@ -65,7 +74,7 @@ Widget loginTextFeild(String hintText, bool obscureText,
           labelText: hintText
           ),
       obscureText: obscureText,
-      validator: validator,
+      validator:validator
     ),
   );
 }

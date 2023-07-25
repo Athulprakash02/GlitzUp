@@ -165,36 +165,6 @@ class FirebaseAuthMethods {
   }
 }
 
-String? validatePassword(String? value) {
-  if (value!.isEmpty) {
-    return 'Please enter your password';
-  } else if (value.length < 6 && value.isNotEmpty) {
-    return 'Minimum 6 characters requiered';
-  } else {
-    return null;
-  }
-}
-
-String? validateEmail(String? value) {
-  if (value!.isEmpty) {
-    return 'Please enter your Email';
-  } else if (value.isEmpty ||
-      !RegExp(r'^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$')
-          .hasMatch(value)) {
-    return 'Enter valid Email';
-  } else {
-    return null;
-  }
-}
-
-String? validateOTP(String? value) {
-  if (value!.isEmpty) {
-    return 'please enter OTP';
-  } else {
-    return null;
-  }
-}
-
 final emailAuth = EmailOTP();
 
 void sendOTP(String email, BuildContext context) async {

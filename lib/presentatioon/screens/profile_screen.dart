@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glitzup/core/constants.dart';
-import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/infrastructure/user%20profile/user_profile.dart';
 import 'package:glitzup/presentatioon/screens/auth/login_screen.dart';
 import 'package:glitzup/presentatioon/widgets/profile_grid_view.dart';
 import 'package:glitzup/presentatioon/widgets/user_details.dart';
-import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
