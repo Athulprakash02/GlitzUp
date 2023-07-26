@@ -2,6 +2,7 @@ import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/presentatioon/screens/add%20profile/add_details_screen.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
@@ -70,7 +71,7 @@ class FirebaseAuthMethods {
       });
     } on FirebaseAuthException catch (e) {
       Navigator.of(context, rootNavigator: true).pop();
-      showSnackbar(context, e.message!);
+      showSnackbar(context, e.message!,kRedColor);
     }
   }
 
@@ -126,7 +127,7 @@ class FirebaseAuthMethods {
       );
     } on FirebaseAuthException catch (e) {
       Navigator.of(context, rootNavigator: true).pop();
-      showSnackbar(context, e.message!);
+      showSnackbar(context, e.message!,kRedColor);
     }
     // finally{
     //   Navigator.of(context,rootNavigator: true).pop();
@@ -177,10 +178,10 @@ void sendOTP(String email, BuildContext context) async {
   // var res = await emailAuth.sendOtp(recipientMail: email);
   if (await emailAuth.sendOTP() == true) {
     // ignore: use_build_context_synchronously
-    showSnackbar(context, 'OTP send succesfully');
+    showSnackbar(context, 'OTP send succesfully',Colors.green);
   } else {
     // ignore: use_build_context_synchronously
-    showSnackbar(context, 'Please try again');
+    showSnackbar(context, 'Please try again',kRedColor);
   }
 }
 
@@ -188,10 +189,10 @@ bool verifyOTP(String email, String userOtp, BuildContext context) {
 // var res = emailAuth.validateOtp(recipientMail: email, userOtp: userOtp);
 
   if (emailAuth.verifyOTP(otp: userOtp) == true) {
-    showSnackbar(context, 'Otp verified');
+    showSnackbar(context, 'Otp verified',Colors.green);
     return true;
   } else {
-    showSnackbar(context, 'Invalid OTP');
+    showSnackbar(context, 'Invalid OTP',kRedColor);
     return false;
   }
 }

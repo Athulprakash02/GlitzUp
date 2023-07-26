@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 bool hiddentextFeild = false;
 
 class SignupScreen extends StatefulWidget {
-   SignupScreen({super.key});
+   const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();

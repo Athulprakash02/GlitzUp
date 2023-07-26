@@ -174,7 +174,7 @@ class _UploadPostState extends State<UploadPost> {
             ),
           );
         } else {
-          return Text('data');
+          return const Text('data');
         }
       },
     );

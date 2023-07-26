@@ -4,7 +4,6 @@ import 'package:glitzup/domain/post%20model/post_model.dart';
 import 'package:glitzup/presentatioon/screens/bottom_nav_bar.dart';
 
 void addPostToFirestore(String username,String caption, String imageUrl) async {
-    print("image $imageUrl");
 
     PostModel newPost = PostModel(
         username: username,
@@ -18,14 +17,12 @@ void addPostToFirestore(String username,String caption, String imageUrl) async {
         .collection('posts')
         .add(newPost.toJson())
         .then((value) {
-      print('post added');
       // Navigator.of(context).pushAndRemoveUntil(
       //     MaterialPageRoute(
       //       builder: (context) => BottomNavBar(),
           // ),
           // (route) => false);
-          Get.offAll(BottomNavBar());
+          Get.offAll(const BottomNavBar());
     }).onError((error, stackTrace) {
-      print(error.toString());
     });
   }

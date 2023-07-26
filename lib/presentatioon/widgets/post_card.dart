@@ -25,7 +25,6 @@ final userProvider = Provider.of<UserProvider>(context);
                       future: userProvider.getProfilePictureUrl(post.username),
                       builder: (context, snapshot) {
                         String? imageUrl = snapshot.data;
-                        print(imageUrl);
                         if(snapshot.connectionState == ConnectionState.waiting){
                           return const CircleAvatar(
                             backgroundImage:NetworkImage(profileImage),

@@ -24,8 +24,8 @@ class UserProvider extends ChangeNotifier {
             
         notifyListeners();
       }
+    // ignore: empty_catches
     } catch (e) {
-      print(e);
     }
   }
 
@@ -45,8 +45,9 @@ class UserProvider extends ChangeNotifier {
             comments: []);
             posts.add(post);
       }
+    // ignore: empty_catches
     } catch (e) {
-      print(e);
+        
     }
     return posts;
   }
@@ -57,11 +58,9 @@ class UserProvider extends ChangeNotifier {
     if(userSnapShot.docs.isNotEmpty){
     
       imageUrl = userSnapShot.docs[0]["image path"];
-      print(imageUrl);
     }else{
     imageUrl = '';
     }
-    print('object $imageUrl');
     return imageUrl;
   }
 }
