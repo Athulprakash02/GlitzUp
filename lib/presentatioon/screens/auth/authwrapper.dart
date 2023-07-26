@@ -14,7 +14,7 @@ class AuthWrapper extends StatelessWidget {
     if(firebaseUser != null){
       return const BottomNavBar();
     }else{
-      return  const LoginScreen();
+      return   LoginScreen();
     }
   }
 }

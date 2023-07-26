@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glitzup/application/user_provider/user_provider.dart';
 import 'package:glitzup/domain/post%20model/post_model.dart';
-import 'package:glitzup/infrastructure/users/user_details.dart';
 import 'package:glitzup/presentatioon/screens/add%20profile/add_details_screen.dart';
 
 import 'package:glitzup/presentatioon/widgets/post_card.dart';
@@ -40,7 +39,7 @@ class HomeScreen extends StatelessWidget {
           future: userProvider.fetchPostsFromFirebase(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
@@ -53,7 +52,7 @@ class HomeScreen extends StatelessWidget {
               return ListView.builder(
                 // scrollDirection: Axis.horizontal,
                 itemCount: posts!.length,
-                itemBuilder: (context, index) => postCard(size,posts![index]),
+                itemBuilder: (context, index) => postCard(size,posts[index],context),
               );
             }
           },

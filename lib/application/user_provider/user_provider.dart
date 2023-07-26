@@ -8,6 +8,7 @@ class UserProvider extends ChangeNotifier {
   UserModel? get currentUser => _currentUser;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+
   Future<void> fetchUserDetailsFromFireStore(String email) async {
     try {
       DocumentSnapshot userSnapshot =
@@ -36,6 +37,7 @@ class UserProvider extends ChangeNotifier {
             postId: postDoc.id,
             username: postDoc["username"],
             imagePath: postDoc["image path"],
+            caption: postDoc["caption"],
             timestamp: postDoc["timestamp"].toDate(),
             likes: List<String>.from(postDoc["likes"]),
             comments: []);
@@ -45,5 +47,19 @@ class UserProvider extends ChangeNotifier {
       print(e);
     }
     return posts;
+  }
+
+  Future<String> getProfilePictureUrl(String username) async{
+    String imageUrl;
+    QuerySnapshot userSnapShot =  await firestore.collection('Users').where('username',isEqualTo: username).get();
+    if(userSnapShot.docs.isNotEmpty){
+    
+      imageUrl = userSnapShot.docs[0]["image path"];
+      print(imageUrl);
+    }else{
+    imageUrl = '';
+    }
+    print('object $imageUrl');
+    return imageUrl;
   }
 }

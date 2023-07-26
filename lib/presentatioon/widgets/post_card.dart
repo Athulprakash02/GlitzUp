@@ -1,11 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:glitzup/application/user_provider/user_provider.dart';
 import 'package:glitzup/core/colors.dart';
+import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/domain/post%20model/post_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../application/functions/date_time_fornat.dart';
 
-Widget postCard(Size size,PostModel post){
+Widget postCard(Size size,PostModel post,BuildContext context){
+final userProvider = Provider.of<UserProvider>(context);
 
   
   
@@ -18,10 +21,29 @@ Widget postCard(Size size,PostModel post){
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListTile(
-                    leading: const CircleAvatar(
-                      backgroundColor: Colors.amber,
-                    ),
-                    title:  Text(post.username),
+                    leading: FutureBuilder<String>(
+                      future: userProvider.getProfilePictureUrl(post.username),
+                      builder: (context, snapshot) {
+                        String? imageUrl = snapshot.data;
+                        print(imageUrl);
+                        if(snapshot.connectionState == ConnectionState.waiting){
+                          return const CircleAvatar(
+                            backgroundImage:NetworkImage(profileImage),
+                          );
+                        }else if(snapshot.hasError){
+                          return const CircleAvatar(
+                            backgroundColor: kGreyColor,
+                          );
+                        }else{
+                          return CircleAvatar(
+                            // radius: 20,
+                            backgroundImage: NetworkImage(imageUrl!),
+                          );
+                        }
+                   
+                      
+                    },),
+                     title:  Text(post.username),
                     
                     trailing:
                         IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert,)),
@@ -30,7 +52,7 @@ Widget postCard(Size size,PostModel post){
                   Container(
                     height: 280,
                     decoration: BoxDecoration(
-                        image: const DecorationImage(image: AssetImage('assets/images/sachin.jpeg',),fit: BoxFit.cover),
+                        image:  DecorationImage(image: NetworkImage(post.imagePath),fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(20)),
                   ),
                   // const SizedBox(
@@ -70,7 +92,7 @@ Widget postCard(Size size,PostModel post){
                   ),
                   const SizedBox(height: 7,),
                     Padding(
-                    padding:  EdgeInsets.only(left: 20),
+                    padding:  const EdgeInsets.only(left: 20),
                     child: Text(formatDateTime(post.timestamp) ,style: const TextStyle(fontSize: 16,color: kGreyColor),),
                   )
                 ],

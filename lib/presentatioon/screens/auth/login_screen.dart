@@ -7,14 +7,9 @@ import 'package:glitzup/presentatioon/screens/auth/signup_screen.dart';
 import 'package:glitzup/presentatioon/widgets/login_textfeild.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatefulWidget {
-   const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+    LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailTextController = TextEditingController();
 
   final TextEditingController _passwordTextController = TextEditingController();

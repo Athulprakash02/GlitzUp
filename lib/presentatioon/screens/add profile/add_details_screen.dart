@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/application/user%20controller/user_controller.dart';
+import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/domain/user%20model/user_model.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/infrastructure/users/add_image.dart';
@@ -73,7 +74,7 @@ Future<void> imagePick() async {
                    if(_formkey.currentState!.validate()){
                     final user = UserModel(
                       email: signeduser!.email!,
-                      imagePath: imageUrl!=null ? imageUrl!:'assets/images/download.png',
+                      imagePath: imageUrl!=null ? imageUrl!:profileImage,
                     fullName: fullNameController.text.trim(),
                     userName: userNameController.text.trim(),
                     bio:bioController.text.isNotEmpty? bioController.text.trim() : '');
