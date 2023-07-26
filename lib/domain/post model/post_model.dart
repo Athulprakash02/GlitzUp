@@ -19,17 +19,13 @@ class PostModel {
     required this.comments,
   });
 
-
-  toJson(){
+  toJson() {
     return {
       "username": username,
       "caption": caption,
       "image path": imagePath,
       "likes": likes,
       "timestamp": timestamp,
-
-
-
     };
-  } 
+  }
 }

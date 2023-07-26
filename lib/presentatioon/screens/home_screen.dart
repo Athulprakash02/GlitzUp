@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:glitzup/application/user_provider/user_provider.dart';
+import 'package:glitzup/infrastructure/users/user_details.dart';
 import 'package:glitzup/presentatioon/screens/add%20profile/add_details_screen.dart';
 
 import 'package:glitzup/presentatioon/widgets/post_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+   
+   
+  
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(

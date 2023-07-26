@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/application/showtextfeild%20provider/show_textfeild_provider.dart';
 import 'package:glitzup/application/text%20feild%20validator%20provider/textfeild_validator_rovider.dart';
+import 'package:glitzup/application/user_provider/user_provider.dart';
 import 'package:glitzup/core/themes.dart';
 import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
 import 'package:glitzup/presentatioon/screens/auth/authwrapper.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ShowTextFeildProvider(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (_) => UserProvider(),
         ),
         ChangeNotifierProvider<TextfieldValidatorProvider>(
           create: (_) => TextfieldValidatorProvider(),

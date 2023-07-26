@@ -1,8 +1,13 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:glitzup/core/colors.dart';
+import 'package:glitzup/application/user_provider/user_provider.dart';
+import 'package:glitzup/domain/post%20model/post_model.dart';
+import 'package:glitzup/domain/user%20model/user_model.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class UploadPost extends StatefulWidget {
   const UploadPost({super.key});
@@ -14,6 +19,7 @@ class UploadPost extends StatefulWidget {
 class _UploadPostState extends State<UploadPost> {
   String? imagePath;
   String? imageUrl;
+  final TextEditingController _captionController = TextEditingController();
 
   Future<void> selectImage(String clicked) async {
     final XFile? imagePicked;
@@ -31,8 +37,41 @@ class _UploadPostState extends State<UploadPost> {
     }
   }
 
+  void addPostToFirestore() async{
+    
+    // print(logged.fullName);
+     
+    // final userProvider = Provider.of<UserProvider>(context, listen: false).fetchUserDetailsFromFireStore(FirebaseAuth.instance.currentUser!.email!);
+    // print(userProvider.);
+  //    final userProvider = Provider.of<UserProvider>(context);
+  // await userProvider.fetchUserDetailsFromFireStore(FirebaseAuth.instance.currentUser!.email!);
+    // final UserModel? loggedUser = userProvider.currentUser;
+    // print(loggedUser!.fullName);
+    // print(FirebaseAuth.instance.currentUser!.email);
+   
+
+    // if (currentUser != null) {
+    //   String username = currentUser.userName;
+
+    //   PostModel newPost = PostModel(
+    //       username: username,
+    //       caption: _captionController.text,
+    //       imagePath: imagePath!,
+    //       timestamp: DateTime.now(),
+    //       likes: [],
+    //       comments: []);
+
+    //       FirebaseFirestore.instance.collection('posts').add(newPost.toJson()).then((value) {
+    //         print('post added');
+    //       }).onError((error, stackTrace) {
+    //         print(error.toString());
+    //       });
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
+  
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
@@ -104,6 +143,7 @@ class _UploadPostState extends State<UploadPost> {
                   width: double.maxFinite,
                   height: size.width * .15,
                   child: TextField(
+                    controller: _captionController,
                     maxLines: 100,
                     decoration: InputDecoration(
                         fillColor: const Color.fromARGB(255, 30, 29, 29)
@@ -120,7 +160,9 @@ class _UploadPostState extends State<UploadPost> {
                   height: size.width / 16,
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      addPostToFirestore();
+                    },
                     child: const Text(
                       'Post',
                       style: TextStyle(fontSize: 20),
