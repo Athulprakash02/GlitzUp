@@ -30,7 +30,7 @@ class SignupScreen extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: SingleChildScrollView(
             child: FormBuilder(
-              autovalidateMode: AutovalidateMode.always,
+              // autovalidateMode: AutovalidateMode.always,
               key: _formkey,
               child: Consumer<TextfieldValidatorProvider>(
                 builder: (context, provider, child) {
