@@ -19,7 +19,9 @@ class UserProvider extends ChangeNotifier {
             email: email,
             fullName: userSnapshot["full name"],
             userName: userSnapshot["username"],
-            imagePath: userSnapshot["image path"]);
+            coverImage: userSnapshot["cover image"],
+            profilePic: userSnapshot["image path"]);
+            
         notifyListeners();
       }
     } catch (e) {

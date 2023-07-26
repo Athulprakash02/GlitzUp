@@ -8,9 +8,14 @@ import 'package:provider/provider.dart';
 
 bool hiddentextFeild = false;
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
    SignupScreen({super.key});
 
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
   // TextEditingController _userNameTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
 
@@ -30,7 +35,7 @@ class SignupScreen extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: SingleChildScrollView(
             child: FormBuilder(
-              // autovalidateMode: AutovalidateMode.always,
+              autovalidateMode: AutovalidateMode.always,
               key: _formkey,
               child: Consumer<TextfieldValidatorProvider>(
                 builder: (context, provider, child) {

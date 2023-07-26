@@ -49,10 +49,10 @@ class ProfileScreen extends StatelessWidget {
                 // pinned: true,
                 stretch: true,
                 expandedHeight: 300,
-                flexibleSpace: const FlexibleSpaceBar(
-                  stretchModes: [StretchMode.zoomBackground],
+                flexibleSpace:  FlexibleSpaceBar(
+                  stretchModes: const [StretchMode.zoomBackground],
                   background: Image(
-                    image: AssetImage('assets/images/sachin.jpeg'),
+                    image: NetworkImage(userData["cover image"]),
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -74,7 +74,8 @@ Future<void> imagePick() async {
                    if(_formkey.currentState!.validate()){
                     final user = UserModel(
                       email: signeduser!.email!,
-                      imagePath: imageUrl!=null ? imageUrl!:profileImage,
+                      profilePic: imageUrl!=null ? imageUrl!:profileImage,
+                      coverImage: coverImage,
                     fullName: fullNameController.text.trim(),
                     userName: userNameController.text.trim(),
                     bio:bioController.text.isNotEmpty? bioController.text.trim() : '');

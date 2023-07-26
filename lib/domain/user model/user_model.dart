@@ -3,14 +3,16 @@ class UserModel {
   final String email;
   final String fullName;
   final String userName;
-  final String imagePath;
+  final String profilePic;
+  final String coverImage;
   final String? bio;
 
   UserModel( { required this.email,
     this.id,
     required this.fullName,
     required this.userName,
-    required this.imagePath,
+    required this.profilePic,
+    required this.coverImage,
     this.bio,
   });
 
@@ -21,7 +23,8 @@ class UserModel {
       "full name": fullName,
       "username": userName,
       "bio": bio,
-      "image path": imagePath,
+      "image path": profilePic,
+      "cover image": coverImage
     };
   }
 }
