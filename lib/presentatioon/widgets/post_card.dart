@@ -1,7 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:glitzup/core/colors.dart';
+import 'package:glitzup/domain/post%20model/post_model.dart';
 
-Widget postCard(Size size){
+import '../../application/functions/date_time_fornat.dart';
+
+Widget postCard(Size size,PostModel post){
+
+  
+  
   return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -14,7 +21,7 @@ Widget postCard(Size size){
                     leading: const CircleAvatar(
                       backgroundColor: Colors.amber,
                     ),
-                    title: const Text('username'),
+                    title:  Text(post.username),
                     
                     trailing:
                         IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert,)),
@@ -40,22 +47,7 @@ Widget postCard(Size size){
                       IconButton(onPressed: () {
                         
                       }, icon: const Icon(Icons.send,size: 28,)),
-                    //   SizedBox(
-                    //     width: 10,
-                    //   ),
-                    //   Icon(
-                    //     Icons.favorite_border,size: 30,
-                    //   ),
-                    //   SizedBox(
-                    //     width: 8,
-                    //   ),
-                    //   Icon(Icons.comment_bank_outlined,size: 30,),
-                    //   SizedBox(
-                    //     width: 8,
-                    //   ),
-                    //  Transform.rotate(
-                    //   angle: -45 * 0.0174533,
-                    //   child: Icon(Icons.send_rounded,size: 30,)),
+                    //  
                       const Spacer(),
                       // Icon(Icons.bookmark_border,size: 30,),
                       IconButton(onPressed: () {
@@ -67,19 +59,19 @@ Widget postCard(Size size){
                     ],
                   ),
                   const SizedBox(height: 10,),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text('200 likes',style: TextStyle(fontSize: 18),),
+                   Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text('${post.likes.length} likes',style: const TextStyle(fontSize: 18),),
                   ),
                   const SizedBox(height: 7,),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text('Caption of the post',style: TextStyle(fontSize: 16),),
+                   Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(post.caption != null?post.caption.toString():"" ,style: const TextStyle(fontSize: 16),),
                   ),
                   const SizedBox(height: 7,),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text('15 minutes ago',style: TextStyle(fontSize: 16,color: kGreyColor),),
+                    Padding(
+                    padding:  EdgeInsets.only(left: 20),
+                    child: Text(formatDateTime(post.timestamp) ,style: const TextStyle(fontSize: 16,color: kGreyColor),),
                   )
                 ],
               ),
