@@ -52,6 +52,29 @@ class UserProvider extends ChangeNotifier {
     return posts;
   }
 
+   Future<List<PostModel>> fetchCurrentUserPosts(String username) async {
+    List<PostModel> posts = [];
+
+    try {
+      QuerySnapshot postSnapshot = await firestore.collection('posts').where('username',isEqualTo: username).get();
+      for (var postDoc in postSnapshot.docs) {
+        PostModel post = PostModel(
+            postId: postDoc.id,
+            username: postDoc["username"],
+            imagePath: postDoc["image path"],
+            caption: postDoc["caption"],
+            timestamp: postDoc["timestamp"].toDate(),
+            likes: List<String>.from(postDoc["likes"]),
+            comments: []);
+            posts.add(post);
+      }
+    // ignore: empty_catches
+    } catch (e) {
+        
+    }
+    return posts;
+  }
+
   Future<String> getProfilePictureUrl(String username) async{
     String imageUrl;
     QuerySnapshot userSnapShot =  await firestore.collection('Users').where('username',isEqualTo: username).get();
