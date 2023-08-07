@@ -167,7 +167,7 @@ class ProfileScreen extends StatelessWidget {
                   Column(
                   children: [
                     Expanded(
-                        child: DefaultTabController(
+                        child: DefaultTabController( 
                             length: 2,
                             child: Column(
                               children: [
