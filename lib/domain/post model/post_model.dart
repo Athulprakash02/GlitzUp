@@ -7,7 +7,7 @@ class PostModel {
   final String? caption;
   final DateTime timestamp;
   final List<String> likes;
-  final List<Comment> comments;
+  final List<CommentModel> comments;
 
   PostModel({
     this.postId,

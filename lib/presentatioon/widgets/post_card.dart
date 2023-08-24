@@ -9,6 +9,7 @@ import '../../application/functions/date_time_fornat.dart';
 
 Widget postCard(Size size, PostModel post, BuildContext context) {
   final userProvider = Provider.of<UserProvider>(context);
+  final TextEditingController commentController = TextEditingController();
 
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -67,35 +68,8 @@ Widget postCard(Size size, PostModel post, BuildContext context) {
                   )),
               IconButton(
                   onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          // color: Colors.red,
-                          child: Padding(
-                            padding: EdgeInsets.all(size.width / 16),
-                            child: Column(
-                              children: [
-                                Text(
-                                  'comments',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                Divider(
-                                  // height: 3,
-                                  color: Colors.white,
-                                ),
-                                Expanded(
-                                    child: ListView.builder(
-                                  itemCount: 50,
-                                  itemBuilder: (context, index) => Text('data'),
-                                )),
-                                TextField()
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
+                    commentBottomSheet(
+                        size, context, commentController, post.postId!);
                   },
                   icon: const Icon(
                     Icons.comment_bank_outlined,
@@ -154,5 +128,71 @@ Widget postCard(Size size, PostModel post, BuildContext context) {
         ],
       ),
     ),
+  );
+}
+
+Future<dynamic> commentBottomSheet(Size size, BuildContext context,
+    TextEditingController commentController, String postId) {
+  return showModalBottomSheet(
+    constraints:
+        BoxConstraints.expand(height: size.height * .7, width: size.width),
+    isScrollControlled: true, 
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+      ),
+    ),
+    // clipBehavior: Clip.hardEdge,
+    // barrierColor: Colors.red,
+    // enableDrag: false,
+    builder: (context) {
+      return Padding(
+        padding: EdgeInsets.all(size.width / 16),
+        child: Column(
+          children: [
+            const Text(
+              'comments',
+              style: TextStyle(fontSize: 18),
+            ),
+            const Divider(
+              // height: 3,
+              color: Colors.white,
+            ),
+            Expanded(
+                child: ListView.builder(
+                    itemCount: 50,
+                    itemBuilder: (context, index) => ListTile(
+                          leading: CircleAvatar(),
+                          title: RichText(
+                            text: TextSpan(children: [
+                              TextSpan(text: postId),
+                              TextSpan(text: '  '),
+                              TextSpan(
+                                  text: '5d',
+                                  style: TextStyle(color: kGreyColor))
+                            ]),
+                          ),
+                          subtitle: Text('commment'),
+                        ))),
+            SizedBox(
+              height: size.width / 20,
+            ),
+            SizedBox(
+              height: size.width * .12,
+              child: TextField(
+                controller: commentController,
+                decoration: InputDecoration(
+                    suffixIcon: const Icon(Icons.send),
+                    hintText: 'Add a comment...',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10))),
+              ),
+            )
+          ],
+        ),
+      );
+    },
   );
 }
