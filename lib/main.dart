@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:glitzup/application/showtextfeild%20provider/show_textfeild_provider.dart';
-import 'package:glitzup/application/text%20feild%20validator%20provider/textfeild_validator_rovider.dart';
-import 'package:glitzup/application/user_provider/user_provider.dart';
+import 'package:glitzup/controller/showtextfeild%20provider/show_textfeild_provider.dart';
+import 'package:glitzup/controller/text%20feild%20validator%20provider/textfeild_validator_rovider.dart';
+import 'package:glitzup/controller/user_provider/user_provider.dart';
 import 'package:glitzup/core/themes.dart';
-import 'package:glitzup/infrastructure/auth/firebase_auth_methods.dart';
-import 'package:glitzup/presentatioon/screens/auth/authwrapper.dart';
+import 'package:glitzup/services/auth/firebase_auth_methods.dart';
+import 'package:glitzup/views/screens/auth/authwrapper.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
