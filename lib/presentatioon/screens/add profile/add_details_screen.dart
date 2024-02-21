@@ -78,6 +78,7 @@ Future<void> imagePick() async {
                       coverImage: coverImage,
                     fullName: fullNameController.text.trim(),
                     userName: userNameController.text.trim(),
+                    likedPosts: [],
                     bio:bioController.text.isNotEmpty? bioController.text.trim() : '');
                    
                     saveUserData(user,context);
