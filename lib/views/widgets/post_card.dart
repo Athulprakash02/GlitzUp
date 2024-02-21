@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:glitzup/controller/post%20controller/post_controller.dart';
 import 'package:glitzup/controller/user_provider/user_provider.dart';
 import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/core/constants.dart';
@@ -10,6 +13,7 @@ import '../../controller/functions/date_time_fornat.dart';
 Widget postCard(Size size, PostModel post, BuildContext context) {
   final userProvider = Provider.of<UserProvider>(context);
   final TextEditingController commentController = TextEditingController();
+  final PostController postController = PostController();
 
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -61,7 +65,11 @@ Widget postCard(Size size, PostModel post, BuildContext context) {
           Row(
             children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(FirebaseAuth.instance.currentUser!.email!);
+                    postController.likeButtonClicked(post.postId!,
+                        FirebaseAuth.instance.currentUser!.email!);
+                  },
                   icon: const Icon(
                     Icons.favorite_outline,
                     size: 28,
@@ -136,7 +144,7 @@ Future<dynamic> commentBottomSheet(Size size, BuildContext context,
   return showModalBottomSheet(
     constraints:
         BoxConstraints.expand(height: size.height * .7, width: size.width),
-    isScrollControlled: true, 
+    isScrollControlled: true,
     context: context,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
