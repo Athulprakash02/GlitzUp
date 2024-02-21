@@ -25,7 +25,5 @@ class FireBasePostService {
     }
 
 
-    Future likeButtonClicked(String postId){
-      
-    }
+    
 }
