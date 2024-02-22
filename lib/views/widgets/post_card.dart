@@ -190,7 +190,7 @@ Future<dynamic> commentBottomSheet(
               future: postController.commentButtonClicked(postId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
                   List<CommentModel> comments = snapshot.data!;
                   return ListView.builder(
@@ -201,15 +201,15 @@ Future<dynamic> commentBottomSheet(
                               text: TextSpan(children: [
                                 TextSpan(text: comments[index].username),
                                 const TextSpan(text: '  '),
-                                const TextSpan(
-                                    text: '5d',
-                                    style: TextStyle(color: kGreyColor))
+                                 TextSpan(
+                                    text: formatDateTime(comments[index].timestamp),
+                                    style: const TextStyle(color: kGreyColor))
                               ]),
                             ),
                             subtitle: Text(comments[index].text),
                           ));
                 } else {
-                  return Text('data');
+                  return const Text('data');
                 }
               },
             )),
@@ -232,7 +232,7 @@ Future<dynamic> commentBottomSheet(
                           commentController.clear();
                           postController.postComment(comment, postId);
                         },
-                        icon: Icon(Icons.send)),
+                        icon: const Icon(Icons.send)),
                     hintText: 'Add a comment...',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10))),
