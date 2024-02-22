@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:get/get.dart';
+import 'package:glitzup/model/comment%20model/comment_model.dart';
 import 'package:glitzup/model/post%20model/post_model.dart';
 import 'package:glitzup/services/posts/posts.dart';
 
@@ -35,5 +34,16 @@ class PostController extends GetxController {
       // updateLikesCount(likesCount.value);
       print('controlleril keroi');
     }
+  }
+
+  Future<List<CommentModel>> commentButtonClicked(String postId) async {
+    List<CommentModel> comments =
+        await _fireBasePostService.fetchComments(postId);
+    return comments;
+  }
+
+  void postComment(CommentModel comment, String postId) async{
+   await _fireBasePostService.addComment(comment, postId);
+    commentButtonClicked(postId);
   }
 }

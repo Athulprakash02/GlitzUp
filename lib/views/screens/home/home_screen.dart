@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
 
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
+      // resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: false,
           title: Padding(
