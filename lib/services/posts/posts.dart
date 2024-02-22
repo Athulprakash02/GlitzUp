@@ -1,3 +1,5 @@
+// ignore_for_file: empty_catches
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -38,10 +40,8 @@ class FireBasePostService {
         'likes': likes,
       });
 
-      print("List field updated successfully.");
       return likes.length;
     } catch (e) {
-      print("Error updating list field: $e");
     }
     return 0;
   }
@@ -58,10 +58,8 @@ class FireBasePostService {
         'likes': likes,
       });
 
-      print("List field updated successfully.");
       return likes.length;
     } catch (e) {
-      print("Error updating list field: $e");
     }
     return 0;
   }
@@ -73,7 +71,6 @@ class FireBasePostService {
           .doc(postId)
           .collection('comments')
           .add(comment.toJson());
-      print('comment added succesfully');
     } catch (e) {}
   }
 

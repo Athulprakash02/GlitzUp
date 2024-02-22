@@ -7,7 +7,6 @@ import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/model/comment%20model/comment_model.dart';
 import 'package:glitzup/model/post%20model/post_model.dart';
-import 'package:glitzup/views/screens/bottom%20nav/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/functions/date_time_fornat.dart';
@@ -70,8 +69,6 @@ Widget postCard(Size size, PostModel post, BuildContext context) {
               Obx(
                 () => IconButton(
                     onPressed: () {
-                      print(FirebaseAuth.instance.currentUser!.email!);
-                      print(post.postId);
                       postController.likeButtonClicked(post.postId!,
                           FirebaseAuth.instance.currentUser!.email!, post);
                     },

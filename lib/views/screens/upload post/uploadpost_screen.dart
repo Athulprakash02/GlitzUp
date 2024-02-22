@@ -18,7 +18,7 @@ class _UploadPostState extends State<UploadPost> {
   String? imagePath;
   String? imageUrl;
   final TextEditingController _captionController = TextEditingController();
-  FireBasePostService _fireBasePostService=FireBasePostService();
+  final FireBasePostService _fireBasePostService=FireBasePostService();
 
   Future<void> selectImage(String clicked, String username) async {
     final XFile? imagePicked;

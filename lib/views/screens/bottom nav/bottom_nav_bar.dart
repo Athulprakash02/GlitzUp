@@ -18,7 +18,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   
   @override
   void initState() {
-    // TODO: implement initState
     getUserDataByEmail(FirebaseAuth.instance.currentUser!.email!);
     super.initState();
   }

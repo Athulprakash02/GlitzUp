@@ -26,13 +26,11 @@ class PostController extends GetxController {
       likesCount.value =
           await _fireBasePostService.postUnliked(postId, currentUserEmailId);
       // updateLikesCount(likesCount.value);
-      print('controlleril keroi');
     } else {
       isFavourite.value = !isFavourite.value;
       likesCount.value =
           await _fireBasePostService.postLiked(postId, currentUserEmailId);
       // updateLikesCount(likesCount.value);
-      print('controlleril keroi');
     }
   }
 
