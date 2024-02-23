@@ -30,8 +30,13 @@ class SearchScreen extends StatelessWidget {
                 return ListView.builder(
                   itemCount:searchResults.length,
                   itemBuilder: (context, index) {
-                    return UserTile(
-                      text: searchResults[index].userName,
+                    return GestureDetector(
+                      onTap: () {
+                        print(searchResults[index].userName);
+                      },
+                      child: UserTile(
+                        text: searchResults[index].userName,
+                      ),
                     );
                   },
                 );

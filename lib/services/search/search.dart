@@ -10,8 +10,8 @@ class SearchService {
       final querySnapshot = await _firebaseFirestore
           .collection('Users')
           .where(
-            'username',
-            isGreaterThanOrEqualTo: searchQuery,
+            'username'.toLowerCase(),
+            isGreaterThanOrEqualTo: searchQuery.toLowerCase(),
           )
           .get();
       users.clear();
