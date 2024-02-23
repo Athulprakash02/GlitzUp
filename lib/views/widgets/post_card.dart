@@ -85,6 +85,7 @@ Widget postCard(Size size, PostModel post, BuildContext context) {
               ),
               IconButton(
                   onPressed: () {
+                    postController.commentButtonClicked(post.postId!);
                     commentBottomSheet(size, context, commentController,
                         post.postId!, postController);
                   },
@@ -183,33 +184,21 @@ Future<dynamic> commentBottomSheet(
               color: Colors.white,
             ),
             Expanded(
-                child: FutureBuilder(
-              future: postController.commentButtonClicked(postId),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasData) {
-                  List<CommentModel> comments = snapshot.data!;
-                  return ListView.builder(
-                      itemCount: comments.length,
+                child:Obx(() =>  ListView.builder(
+                      itemCount: postController.comments.length,
                       itemBuilder: (context, index) => ListTile(
                             leading: const CircleAvatar(),
                             title: RichText(
                               text: TextSpan(children: [
-                                TextSpan(text: comments[index].username),
+                                TextSpan(text: postController.comments[index].username),
                                 const TextSpan(text: '  '),
                                  TextSpan(
-                                    text: formatDateTime(comments[index].timestamp),
+                                    text: formatDateTime(postController.comments[index].timestamp),
                                     style: const TextStyle(color: kGreyColor))
                               ]),
                             ),
-                            subtitle: Text(comments[index].text),
-                          ));
-                } else {
-                  return const Text('data');
-                }
-              },
-            )),
+                            subtitle: Text(postController.comments[index].text),
+                          )))),
             SizedBox(
               height: size.width / 20,
             ),

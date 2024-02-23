@@ -5,6 +5,7 @@ import 'package:glitzup/services/posts/posts.dart';
 
 class PostController extends GetxController {
   final FireBasePostService _fireBasePostService = FireBasePostService();
+  List<CommentModel> comments = <CommentModel>[].obs;
   var isFavourite = false.obs;
   var likesCount = 0.obs;
 
@@ -34,10 +35,10 @@ class PostController extends GetxController {
     }
   }
 
-  Future<List<CommentModel>> commentButtonClicked(String postId) async {
-    List<CommentModel> comments =
-        await _fireBasePostService.fetchComments(postId);
-    return comments;
+  void commentButtonClicked(String postId)  {
+    // List<CommentModel> comments =
+        _fireBasePostService.fetchComments(postId,comments);
+    // return comments;
   }
 
   void postComment(CommentModel comment, String postId) async{

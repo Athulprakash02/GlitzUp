@@ -74,21 +74,22 @@ class FireBasePostService {
     } catch (e) {}
   }
 
-  Future<List<CommentModel>> fetchComments(String postId) async {
-    List<CommentModel> postComments = [];
+  Future<void> fetchComments(String postId, List<CommentModel> postComments) async {
+    // List<CommentModel> postComments = [];
     try {
       final querySnapshot = await _firebaseFirestore
           .collection('posts')
           .doc(postId)
           .collection('comments')
           .get();
+          postComments.clear();
       for (var comments in querySnapshot.docs) {
         Map<String, dynamic> comment = comments.data();
         postComments.add(CommentModel.fromJson(comment));
       }
-      return postComments;
+      // return postComments;
     } catch (e) {
-      return postComments;
+      // return postComments;
     }
   }
 }
