@@ -19,7 +19,7 @@ class UserProvider extends ChangeNotifier {
             email: email,
             fullName: userSnapshot["full name"],
             userName: userSnapshot["username"],
-            likedPosts: userSnapshot['liked posts'],
+            // likedPosts: userSnapshot['liked posts'],
             coverImage: userSnapshot["cover image"],
             profilePic: userSnapshot["image path"]);
             
