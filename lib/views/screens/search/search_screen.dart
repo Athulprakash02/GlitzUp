@@ -10,7 +10,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SearchQueryController _searchQueryController =
+    SearchQueryController searchQueryController =
         Get.put(SearchQueryController());
     return Scaffold(
       body: Padding(
@@ -18,15 +18,15 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           children: [
             CupertinoSearchTextField(
-              controller: _searchQueryController.searchController,
-              onChanged: (value) => _searchQueryController.searchUser(value),
-              backgroundColor: Color.fromARGB(255, 65, 64, 64),
+              controller: searchQueryController.searchController,
+              onChanged: (value) => searchQueryController.searchUser(value),
+              backgroundColor: const Color.fromARGB(255, 65, 64, 64),
               
             ),
             Expanded(
               child: SizedBox(child: Obx(() {
                 List<UserModel> searchResults =
-                    _searchQueryController.users.toList();
+                    searchQueryController.users.toList();
                 return ListView.builder(
                   itemCount:searchResults.length,
                   itemBuilder: (context, index) {

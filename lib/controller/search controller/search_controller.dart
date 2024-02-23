@@ -9,7 +9,6 @@ class SearchQueryController extends GetxController {
   TextEditingController searchController = TextEditingController();
 
   void searchUser(String searchQuery) async {
-    print(searchQuery);
     users.clear();
   
       _searchService.fetchSearchDetails(searchQuery, users);

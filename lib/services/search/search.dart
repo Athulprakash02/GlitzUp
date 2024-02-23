@@ -7,7 +7,6 @@ class SearchService {
   Future<void> fetchSearchDetails(
       String searchQuery, List<UserModel> users) async {
     try {
-      print('keri');
       final querySnapshot = await _firebaseFirestore
           .collection('Users')
           .where(
@@ -18,11 +17,8 @@ class SearchService {
       users.clear();
       // print(querySnapshot.docs.length);
       for (var data in querySnapshot.docs) {
-        print('obt');
         Map<String, dynamic> user = data.data();
         users.add(UserModel.fromJson(user));
-        print('jshdb');
-        print(user);
       }
       
       // print(users.first.email);
