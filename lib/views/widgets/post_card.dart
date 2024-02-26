@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/controller/post%20controller/post_controller.dart';
@@ -7,6 +8,7 @@ import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/model/comment%20model/comment_model.dart';
 import 'package:glitzup/model/post%20model/post_model.dart';
+import 'package:glitzup/views/screens/other%20user%20profile/other_user_profile.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/functions/date_time_fornat.dart';
@@ -25,33 +27,36 @@ Widget postCard(Size size, PostModel post, BuildContext context) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListTile(
-            leading: FutureBuilder<String>(
-              future: userProvider.getProfilePictureUrl(post.username),
-              builder: (context, snapshot) {
-                String? imageUrl = snapshot.data;
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircleAvatar(
-                    backgroundImage: NetworkImage(profileImage),
-                  );
-                } else if (snapshot.hasError) {
-                  return const CircleAvatar(
-                    backgroundColor: kGreyColor,
-                  );
-                } else {
-                  return CircleAvatar(
-                    // radius: 20,
-                    backgroundImage: NetworkImage(imageUrl!),
-                  );
-                }
-              },
+          GestureDetector(
+            // onTap: () => Get.to(()=> OtherUserProfile(profile: )),
+            child: ListTile(
+              leading: FutureBuilder<String>(
+                future: userProvider.getProfilePictureUrl(post.username),
+                builder: (context, snapshot) {
+                  String? imageUrl = snapshot.data;
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircleAvatar(
+                      backgroundImage: NetworkImage(profileImage),
+                    );
+                  } else if (snapshot.hasError) {
+                    return const CircleAvatar(
+                      backgroundColor: kGreyColor,
+                    );
+                  } else {
+                    return CircleAvatar(
+                      // radius: 20,
+                      backgroundImage: NetworkImage(imageUrl!),
+                    );
+                  }
+                },
+              ),
+              title: Text(post.username),
+              trailing: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.more_vert,
+                  )),
             ),
-            title: Text(post.username),
-            trailing: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.more_vert,
-                )),
           ),
 
           Container(
