@@ -28,4 +28,16 @@ class PostModel {
       "timestamp": timestamp,
     };
   }
+
+  factory PostModel.fromJson(Map<String, dynamic> json) {
+    return PostModel(
+            postId: json['postId'],
+            username: json["username"],
+            imagePath: json["image path"],
+            caption: json["caption"],
+            timestamp: json["timestamp"].toDate(),
+            likes: List<String>.from(json["likes"]),
+            comments: []);
+            
+  }
 }

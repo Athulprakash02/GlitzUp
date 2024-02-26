@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:glitzup/model/comment%20model/comment_model.dart';
+import 'package:glitzup/model/post%20model/post_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FireBasePostService {
@@ -41,8 +42,7 @@ class FireBasePostService {
       });
 
       return likes.length;
-    } catch (e) {
-    }
+    } catch (e) {}
     return 0;
   }
 
@@ -59,8 +59,7 @@ class FireBasePostService {
       });
 
       return likes.length;
-    } catch (e) {
-    }
+    } catch (e) {}
     return 0;
   }
 
@@ -74,7 +73,8 @@ class FireBasePostService {
     } catch (e) {}
   }
 
-  Future<void> fetchComments(String postId, List<CommentModel> postComments) async {
+  Future<void> fetchComments(
+      String postId, List<CommentModel> postComments) async {
     // List<CommentModel> postComments = [];
     try {
       final querySnapshot = await _firebaseFirestore
@@ -82,7 +82,7 @@ class FireBasePostService {
           .doc(postId)
           .collection('comments')
           .get();
-          postComments.clear();
+      postComments.clear();
       for (var comments in querySnapshot.docs) {
         Map<String, dynamic> comment = comments.data();
         postComments.add(CommentModel.fromJson(comment));
@@ -91,5 +91,21 @@ class FireBasePostService {
     } catch (e) {
       // return postComments;
     }
+  }
+
+  Future<void> fetchUserPosts(String username, List<PostModel> posts) async {
+    try {
+      final querySnapshot = await _firebaseFirestore
+          .collection('posts')
+          .where('username', isEqualTo: username)
+          .get();
+
+      posts.clear();
+      for (var data in querySnapshot.docs) {
+        Map<String, dynamic> post = data.data();
+        posts.add(PostModel.fromJson(post));
+        
+      }
+    } catch (e) {}
   }
 }

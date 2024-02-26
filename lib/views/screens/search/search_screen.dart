@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/controller/search%20controller/search_controller.dart';
 import 'package:glitzup/model/user%20model/user_model.dart';
+import 'package:glitzup/views/screens/other%20user%20profile/other_user_profile.dart';
 import 'package:glitzup/views/widgets/user_tile.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -21,20 +22,21 @@ class SearchScreen extends StatelessWidget {
               controller: searchQueryController.searchController,
               onChanged: (value) => searchQueryController.searchUser(value),
               backgroundColor: const Color.fromARGB(255, 65, 64, 64),
-              
             ),
             Expanded(
               child: SizedBox(child: Obx(() {
                 List<UserModel> searchResults =
                     searchQueryController.users.toList();
                 return ListView.builder(
-                  itemCount:searchResults.length,
+                  itemCount: searchResults.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        print(searchResults[index].userName);
+                        Get.to(() =>
+                            OtherUserProfile(profile: searchResults[index]));
                       },
                       child: UserTile(
+                        profilePicUrl: searchResults[index].profilePic,
                         text: searchResults[index].userName,
                       ),
                     );

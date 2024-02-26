@@ -10,7 +10,7 @@ class NotificationScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('notifications',style: TextStyle(fontSize: 25),),),
       body:  ListView.builder(
                   itemCount: 20 ,itemBuilder: (context, index) {
-                return   const UserTile(text: 'atx.ul_ liked your post',time: '1h', );
+                return    UserTile(profilePicUrl: '',  text: 'atx.ul_ liked your post',time: '1h', );
                 },) ,
     );
   }

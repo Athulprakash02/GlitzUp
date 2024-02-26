@@ -1,13 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:glitzup/core/colors.dart';
 
 class UserTile extends StatelessWidget {
   final String text;
+  final String profilePicUrl;
   final String? time;
   const UserTile({
     super.key,
     required this.text,
-    this.time,
+    this.time, required this.profilePicUrl,
   });
 
   @override
@@ -15,8 +17,9 @@ class UserTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
-          leading: const CircleAvatar(
+          leading:  CircleAvatar(
             radius: 20,
+            backgroundImage:  NetworkImage(profilePicUrl),
           ),
           title: RichText(
               text: TextSpan(children: [
