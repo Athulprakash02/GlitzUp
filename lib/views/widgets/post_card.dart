@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/controller/post%20controller/post_controller.dart';
@@ -8,7 +7,6 @@ import 'package:glitzup/core/colors.dart';
 import 'package:glitzup/core/constants.dart';
 import 'package:glitzup/model/comment%20model/comment_model.dart';
 import 'package:glitzup/model/post%20model/post_model.dart';
-import 'package:glitzup/views/screens/other%20user%20profile/other_user_profile.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/functions/date_time_fornat.dart';

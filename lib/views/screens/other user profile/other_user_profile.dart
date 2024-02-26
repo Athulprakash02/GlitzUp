@@ -1,12 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:glitzup/controller/post%20controller/post_controller.dart';
-import 'package:glitzup/model/post%20model/post_model.dart';
 
 import 'package:glitzup/model/user%20model/user_model.dart';
-import 'package:glitzup/views/screens/bottom%20nav/bottom_nav_bar.dart';
 import 'package:glitzup/views/widgets/profile_grid_view.dart';
 import 'package:glitzup/views/widgets/user_details.dart';
 
